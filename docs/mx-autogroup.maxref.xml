@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="mx-autogroup" module="schillinger">
+
+	<digest>
+		Group patterns by available options
+	</digest>
+	<description>
+		<o>mx-autogroup</o> groups a (pat) pattern into groups separated by the symbol g.
+		It automatically detects what groupings are possible and has an outlet to fill
+		a <o>umenu</o> with them. Grouping is used to structure a pattern into bigger
+		rhythmical cells with the same length. This object works best in conjunction
+		with the other mx-objects, but user-created (pat) messages may also work.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">Manolo Müller</metadata>
+		<metadata name="tag">schillinger</metadata>
+		<metadata name="tag">message</metadata>
+		<metadata name="tag">utility</metadata>
+	</metadatalist>
+
+	<!--INLETS-->
+	<inletlist>
+		<inlet id="0" type="message">
+			<digest>(pat) Pattern to be grouped</digest>
+		</inlet>
+	</inletlist>
+
+	<!--OUTLETS-->
+	<outletlist>
+		<outlet id="0" type="message">
+			<digest>Grouped pattern</digest>
+		</outlet>
+		<outlet id="1" type="list">
+			<digest>Possible groupings as list</digest>
+		</outlet>
+		<outlet id="2" type="message">
+			<digest>Possible groupings, connect to <o>umenu</o></digest>
+		</outlet>
+	</outletlist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="pat">
+			<digest>
+				Load pattern to be grouped
+			</digest>
+		</method>
+		<method name="groupby">
+			<arglist>
+				<arg name="grouping" optional="0" type="int" />
+			</arglist>
+			<digest>
+				Perform grouping by the argument of this message
+			</digest>
+			<description>
+				Grouping means structuring a pattern into groups of equal length.
+				The object calculates which groupings are possible by modulo division
+				with the sum of the parts of the pattern. This works best with preexisting
+				mx-objects, because they generally put out patterns that are symmetrical
+				and easily groupable, because of their periodic nature. Example:
+				<m>2 2 1 1 2 2</m> <m>groupby <b>2</b></m> -> <m>g 2 g 2 g 1 1 g 2 g 2</m>.
+				<m>2 2 1 1 2 2</m> <m>groupby <b>5</b></m> -> <m>g 2 2 1 g 1 2 2</m>.
+			</description>
+		</method>
+		<method name="bang">
+			<digest>
+				Output the last grouping
+			</digest>
+		</method>
+</methodlist>
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="mx-permute-groups"/>
+		<seealso name="mxp1"/>
+	</seealsolist>
+
+</c74object>

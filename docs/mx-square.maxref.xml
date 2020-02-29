@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="mx-square" module="schillinger">
+
+	<digest>
+		Enlarge patterns by squaring
+	</digest>
+	<description>
+		<o>mx-square</o> squares a pattern according to the rules of distributive
+		patterns, in accordance with Chapter 12 of Schillinger's book. A pattern of
+		the form (a+b...+n)^2 is multiplied out, without summing the parts, so it
+		becomes (a^2+ab...+an) + (ab+b^2...+bn)... + (am+bm...+m^2). Also, a synchronizing
+		pattern is output, in the form sum(a+b...+n)*a + sum(a+b...+n)*b...+ sum(a+b...+n)*n.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">Manolo Müller</metadata>
+		<metadata name="tag">schillinger</metadata>
+		<metadata name="tag">message</metadata>
+		<metadata name="tag">manipulation</metadata>
+	</metadatalist>
+
+	<!--INLETS-->
+	<inletlist>
+		<inlet id="0" type="pat">
+			<digest>Pattern to be squared</digest>
+		</inlet>
+	</inletlist>
+
+	<!--OUTLETS-->
+	<outletlist>
+		<outlet id="0" type="pat">
+			<digest>Squared pattern</digest>
+		</outlet>
+		<outlet id="1" type="pat">
+			<digest>Sync pattern</digest>
+		</outlet>
+	</outletlist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="pat">
+			<digest>
+				Load pattern to be squared and output
+			</digest>
+			<description>
+			</description>
+		</method>
+		<method name="bang">
+			<arglist/>
+			<digest>
+				Output the last squared pattern
+			</digest>
+		</method>
+</methodlist>
+
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="mx-cube"/>
+		<seealso name="mx-permute"/>
+		<seealso name="mx-player~"/>
+	</seealsolist>
+
+</c74object>

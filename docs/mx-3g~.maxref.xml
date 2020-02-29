@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="mx-3g~" module="schillinger">
+
+	<digest>
+		Generate rhythms by interference of three periodicities
+	</digest>
+	<description>
+		<o>mx-3g~</o> generates and plays a rhythmical pattern from the interference of
+		three synchronized monomial periodicities (generators), according to Chapter 6
+		of Schillinger's book. It plays a polyrhythm of a over b over c,
+		and also a countertheme to this polyrhythm.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">Manolo Müller</metadata>
+		<metadata name="tag">schillinger</metadata>
+		<metadata name="tag">signal</metadata>
+		<metadata name="tag">generator</metadata>
+	</metadatalist>
+
+	<!--INLETS-->
+	<inletlist>
+		<inlet id="0" type="signal">
+			<digest>Click to advance one step</digest>
+		</inlet>
+		<inlet id="1" type="signal">
+			<digest>Click to reset sequencer</digest>
+		</inlet>
+		<inlet id="2" type="signal">
+			<digest>Step number to jump to</digest>
+		</inlet>
+	</inletlist>
+
+	<!--OUTLETS-->
+	<outletlist>
+		<outlet id="0" type="signal">
+			<digest>Resultant</digest>
+		</outlet>
+		<outlet id="1" type="signal">
+			<digest>Generator a</digest>
+		</outlet>
+		<outlet id="2" type="signal">
+			<digest>Generator b</digest>
+		</outlet>
+		<outlet id="3" type="signal">
+			<digest>Generator c</digest>
+		</outlet>
+		<outlet id="4" type="signal">
+			<digest>Countertheme resultant</digest>
+		</outlet>
+		<outlet id="5" type="signal">
+			<digest>Countertheme generator a</digest>
+		</outlet>
+		<outlet id="6" type="signal">
+			<digest>Countertheme generator b</digest>
+		</outlet>
+		<outlet id="7" type="signal">
+			<digest>Countertheme generator c</digest>
+		</outlet>
+		<outlet id="8" type="message">
+			<digest>Output visualisation messages</digest>
+		</outlet>
+	</outletlist>
+
+	<!--ARGUMENTS-->
+	<objarglist>
+		<objarg name="gena" optional="1" type="int">
+			<digest>Set generator a</digest>
+		</objarg>
+		<objarg name="genb" optional="1" type="int">
+			<digest>Set generator b</digest>
+		</objarg>
+		<objarg name="genc" optional="1" type="int">
+			<digest>Set generator c</digest>
+		</objarg>
+	</objarglist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="gen">
+			<arglist>
+				<arg name="gena" optional="0" type="int" />
+				<arg name="genb" optional="0" type="int" />
+				<arg name="genc" optional="0" type="int" />
+			</arglist>
+			<digest>
+				Generate patterns
+			</digest>
+			<description>
+				The <m>gen</m> message generates a rhythmical pattern
+				from the interference of three synchronized monomial periodicities (generators). The
+				periodicity of the generators must be included as arguments to this message.
+				The syntax is thus: <b>gen <m>gena (int)</m> <m>genb (int)</m>
+				<m>generator c (int)</m></b>.
+			</description>
+		</method>
+
+		<method name="bang">
+			<arglist />
+			<digest>
+				Output patterns
+			</digest>
+			<description>
+				Output visualisation messages
+
+			</description>
+		</method>
+</methodlist>
+
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="mx-3g"/>
+		<seealso name="mxp1"/>
+		<seealso name="mxp2"/>
+	</seealsolist>
+
+</c74object>

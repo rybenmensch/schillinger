@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="mx-permute-groups" module="schillinger">
+
+	<digest>
+		Permute group patterns
+	</digest>
+	<description>
+		<o>mx-permute-groups</o> permutes group patterns in different ways,
+		i.e. it shifts the order of items in a pattern.
+		Unlike <o>mx-permute</o> which operates on
+		inividual notes, <o>mx-permute-groups</o> permutes whole groups of notes.
+		Patterns can either be
+		permuted generally, so that every combination is eventually generated,
+		or in a circular fashion.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">Manolo Müller</metadata>
+		<metadata name="tag">schillinger</metadata>
+		<metadata name="tag">message</metadata>
+		<metadata name="tag">manipulation</metadata>
+	</metadatalist>
+
+	<!--INLETS-->
+	<inletlist>
+		<inlet id="0" type="message">
+			<digest>(group) Group pattern to be permuted</digest>
+		</inlet>
+	</inletlist>
+
+	<!--OUTLETS-->
+	<outletlist>
+		<outlet id="0" type="pat">
+			<digest>Permuted pattern</digest>
+		</outlet>
+		<outlet id="1" type="patbin">
+			<digest>Permuted pattern</digest>
+		</outlet>
+		<outlet id="2" type="int">
+			<digest>Amount of permutations</digest>
+		</outlet>
+		<outlet id="3" type="bang">
+			<digest>Bang when highest permutation is reached</digest>
+		</outlet>
+	</outletlist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="group">
+			<digest>
+				Load group pattern to be permuted
+			</digest>
+		</method>
+
+		<method name="recall">
+			<arglist>
+				<arg name="index" optional="0" type="int" />
+			</arglist>
+			<digest>
+				Output the permutation associated with the index
+			</digest>
+		</method>
+		<method name="circular">
+			<arglist>
+				<arg name="index" optional="0" type="int" />
+			</arglist>
+			<digest>
+				Output the circular permutation associated with the index
+			</digest>
+			<description>
+				Circular permutations are permutations, where the order of the
+				elements is shifted in a wraparound, circular style, e.g.
+				<m>g1 g2 g3</m> -> <m>g2 g3 g1</m>.
+			</description>
+		</method>
+		<method name="circular">
+			<arglist>
+				<arg name="index" optional="0" type="int" />
+			</arglist>
+			<digest>
+				Output the anticircular permutation associated with the index
+			</digest>
+			<description>
+				Anticircular permutations are permutations, where the order of the
+				elements is shifted in a wraparound, circular style, but also the
+				initial order of the items in the pattern is inversed, e.g.
+				<m>g1 g2 g3</m> -> <m>g1 g3 g2</m> -> <m>g3 g2 g1</m>.
+			</description>
+		</method>
+</methodlist>
+
+<attributelist>
+	<attribute name="circ_mode" get="1" set="1" type="long" size="1">
+		<digest>
+			Change mode of <m>circular</m> and <m>anticircular</m> messages
+		</digest>
+		<description>
+			When <b>circ_mode</b> is 0, the circular and anticircular permutations
+			are output in forward fashion, e.g. <m>g1 g2 g3</m> -> <m>g2 g3 g1</m>.
+			When <b>circ_mode</b> is 1, the circular and anticircular permutations
+			are output in reverse fashion, e.g. <m>g1 g2 g3</m> -> <m>g3 g1 g2</m>.
+		</description>
+	</attribute>
+</attributelist>
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="mx-autogroup"/>
+		<seealso name="mx-patconv"/>
+		<seealso name="mxp1"/>
+	</seealsolist>
+
+</c74object>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="mx-c" module="schillinger">
+
+	<digest>
+		Generate rhythms by contracting a group of pairs
+	</digest>
+	<description>
+		<o>mx-c</o> generates and outputs a two-part rhythmical pattern from
+		the sequence of a two generator fractioned interference (see <o>mxp2</o>)
+		and a two-generator interference (see <o>mxp1</o>).
+		It is called contraction because we are moving from a long to a short
+		group, according to Chapter 5 of Schillingers book.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">Manolo Müller</metadata>
+		<metadata name="tag">schillinger</metadata>
+		<metadata name="tag">message</metadata>
+		<metadata name="tag">generator</metadata>
+	</metadatalist>
+
+	<!--INLETS-->
+	<inletlist>
+		<inlet id="0" type="message">
+			<digest>(gen) Generator pair</digest>
+		</inlet>
+	</inletlist>
+
+	<!--OUTLETS-->
+	<outletlist>
+		<outlet id="0" type="patbin">
+			<digest>Output resultant</digest>
+		</outlet>
+		<outlet id="1" type="patbin">
+			<digest>Output generator a</digest>
+		</outlet>
+		<outlet id="2" type="patbin">
+			<digest>Output generators b0-bn</digest>
+			<description>
+				According to the formula n = a - b + 1, this outlet will output
+				b patterns b0-bn in the format <b>b0</b><m>patbin</m><m>(list)</m>.
+			</description>
+		</outlet>
+		<outlet id="3" type="message">
+			<digest>Output visualisation messages</digest>
+		</outlet>
+	</outletlist>
+
+	<!--ARGUMENTS-->
+	<objarglist>
+		<objarg name="gena" optional="1" type="int">
+			<digest>Set generator a</digest>
+		</objarg>
+		<objarg name="genb" optional="1" type="int">
+			<digest>Set generator b</digest>
+		</objarg>
+	</objarglist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="gen">
+			<arglist>
+				<arg name="gena" optional="0" type="int" />
+				<arg name="genb" optional="0" type="int" />
+			</arglist>
+			<digest>
+				Generate patterns
+			</digest>
+			<description>
+				The <m>gen</m> message generates and outputs a two-part rhythmical pattern.
+				The periodicity of the generators must be included as arguments to this message.
+				The syntax is thus: <b>gen <m>gena (int)</m> <m>genb (int)</m></b>.
+			</description>
+		</method>
+
+		<method name="bang">
+			<arglist />
+			<digest>
+				Output patterns
+			</digest>
+			<description>
+				Outputs the resulting patterns calculated from the arguments or
+				<m>gen</m> message.
+			</description>
+		</method>
+</methodlist>
+
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="mx-c~"/>
+		<seealso name="mx-b"/>
+		<seealso name="mx-e"/>
+		<seealso name="mxp2"/>
+		<seealso name="mx-player~"/>
+	</seealsolist>
+
+</c74object>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="mx-player~" module="schillinger">
+
+	<digest>
+		Play rhythmical patterns
+	</digest>
+	<description>
+		<o>mx-player~</o> plays a rhythmical pattern supplied by the user. It is
+		driven by clicks in the leftmost inlet.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">Manolo Müller</metadata>
+		<metadata name="tag">schillinger</metadata>
+		<metadata name="tag">signal</metadata>
+		<metadata name="tag">message</metadata>
+		<metadata name="tag">player</metadata>
+	</metadatalist>
+
+	<!--INLETS-->
+	<inletlist>
+		<inlet id="0" type="signal">
+			<digest>Click to advance one step</digest>
+		</inlet>
+		<inlet id="1" type="signal">
+			<digest>Click to reset sequencer</digest>
+		</inlet>
+		<inlet id="2" type="signal">
+			<digest>Step number to jump to</digest>
+		</inlet>
+	</inletlist>
+
+	<!--OUTLETS-->
+	<outletlist>
+		<outlet id="0" type="signal">
+			<digest>Pattern</digest>
+		</outlet>
+		<outlet id="1" type="signal">
+			<digest>Common denominator</digest>
+		</outlet>
+		<outlet id="2" type="signal">
+			<digest>Common product</digest>
+		</outlet>
+		<outlet id="3" type="signal">
+			<digest>Step number</digest>
+		</outlet>
+		<outlet id="4" type="message">
+			<digest>Output visualisation messages</digest>
+		</outlet>
+	</outletlist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="pat">
+			<digest>
+				Load pattern to be played
+			</digest>
+			<description>
+				The <m>pat</m> message loads a pattern into memory to be played by the object.
+				Example syntax: <b>pat <m>3 2 4</m></b>. This will produce a
+				pattern with a total length of 9 steps, the three steps being 3/9, 2/9
+				and 4/9 in length.
+			</description>
+		</method>
+		<method name="patbin">
+			<digest>
+				Load pattern to be played
+			</digest>
+			<description>
+				The <m>patbin</m> message loads a pattern into memory to be played by the object.
+				Example syntax: <b>pat <m>1 0 1 1 0 0 0</m></b>.
+				This will produce a pattern with a total length of 7 steps,
+				the three steps being 2/9, 1/9 and 4/9 in length. The syntax is
+				intentionally close to the output of <b>getrow</b>from <o>matrixctrl</o>.
+			</description>
+		</method>
+
+		<method name="bang">
+			<arglist/>
+			<digest>
+				Output visualisation messages
+			</digest>
+		</method>
+</methodlist>
+
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="mx-patconv"/>
+		<seealso name="mx-permute"/>
+		<seealso name="mx-square"/>
+	</seealsolist>
+
+</c74object>

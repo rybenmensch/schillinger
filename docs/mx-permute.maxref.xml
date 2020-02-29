@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="mx-permute" module="schillinger">
+
+	<digest>
+		Permute patterns
+	</digest>
+	<description>
+		<o>mx-permute</o> permutes patterns in different ways,
+		i.e. it shifts the order of items in a pattern. Patterns can either be
+		permuted generally, so that every combination is eventually generated,
+		or in a circular fashion. In its general usage, it guarantees variation without repetition.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">Manolo Müller</metadata>
+		<metadata name="tag">schillinger</metadata>
+		<metadata name="tag">message</metadata>
+		<metadata name="tag">manipulation</metadata>
+	</metadatalist>
+
+	<!--INLETS-->
+	<inletlist>
+		<inlet id="0" type="message">
+			<digest>(pat|patbin) Pattern to be permuted</digest>
+		</inlet>
+	</inletlist>
+
+	<!--OUTLETS-->
+	<outletlist>
+		<outlet id="0" type="pat">
+			<digest>Permuted pattern</digest>
+		</outlet>
+		<outlet id="1" type="patbin">
+			<digest>Permuted pattern</digest>
+		</outlet>
+		<outlet id="2" type="int">
+			<digest>Amount of permutations</digest>
+		</outlet>
+		<outlet id="3" type="bang">
+			<digest>Bang when highest permutation is reached</digest>
+		</outlet>
+	</outletlist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="pat">
+			<digest>
+				Load pattern to be permuted
+			</digest>
+		</method>
+		<method name="patbin">
+			<digest>
+				Load pattern to be permuted
+			</digest>
+		</method>
+		<method name="recall">
+			<arglist>
+				<arg name="index" optional="0" type="int" />
+			</arglist>
+			<digest>
+				Output the permutation associated with the index
+			</digest>
+		</method>
+		<method name="circular">
+			<arglist>
+				<arg name="index" optional="0" type="int" />
+			</arglist>
+			<digest>
+				Output the circular permutation associated with the index
+			</digest>
+			<description>
+				Circular permutations are permutations, where the order of the
+				elements is shifted in a wraparound, circular style, e.g.
+				<m>1 2 3</m> -> <m>2 3 1</m>.
+			</description>
+		</method>
+		<method name="circular">
+			<arglist>
+				<arg name="index" optional="0" type="int" />
+			</arglist>
+			<digest>
+				Output the anticircular permutation associated with the index
+			</digest>
+			<description>
+				Anticircular permutations are permutations, where the order of the
+				elements is shifted in a wraparound, circular style, but also the
+				initial order of the items in the pattern is inversed, e.g.
+				<m>1 2 3</m> -> <m>1 3 2</m> -> <m>3 2 1</m>.
+			</description>
+		</method>
+</methodlist>
+
+<attributelist>
+	<attribute name="circ_mode" get="1" set="1" type="long" size="1">
+		<digest>
+			Change mode of <m>circular</m> and <m>anticircular</m> messages
+		</digest>
+		<description>
+			When <b>circ_mode</b> is 0, the circular and anticircular permutations
+			are output in forward fashion, e.g. <m>1 2 3</m> -> <m>2 3 1</m>.
+			When <b>circ_mode</b> is 1, the circular and anticircular permutations
+			are output in reverse fashion, e.g. <m>1 2 3</m> -> <m>3 1 2</m>.
+		</description>
+	</attribute>
+</attributelist>
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="mx-permute-groups"/>
+		<seealso name="mx-patconv"/>
+		<seealso name="mxp1"/>
+	</seealsolist>
+
+</c74object>

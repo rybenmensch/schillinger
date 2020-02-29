@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="mx-cube" module="schillinger">
+
+	<digest>
+		Enlarge patterns by cubing
+	</digest>
+	<description>
+		<o>mx-cube</o> cubes a pattern according to the rules of distributive
+		patterns, in accordance with Chapter 12 of Schillinger's book. A pattern of
+		the form (a+b...+n)^3 is multiplied out, without summing the parts, so it
+		becomes a*(a^3+ab...+an)... + a*(am+bm...+m^3)... + m*(a^3+ab...+an)...
+		+ m*(am+bm...+m^3)+. A synchronizing pattern is output, being the square
+		of the input pattern, multiplied by the sum of the input pattern. Another
+		synchronizing pattern is output, being the input polynomial, multiplied
+		by the square of the sum of the input pattern.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">Manolo Müller</metadata>
+		<metadata name="tag">schillinger</metadata>
+		<metadata name="tag">message</metadata>
+		<metadata name="tag">manipulation</metadata>
+	</metadatalist>
+
+	<!--INLETS-->
+	<inletlist>
+		<inlet id="0" type="pat">
+			<digest>Pattern to be cubed</digest>
+		</inlet>
+	</inletlist>
+
+	<!--OUTLETS-->
+	<outletlist>
+		<outlet id="0" type="pat">
+			<digest>Cubed pattern</digest>
+		</outlet>
+		<outlet id="1" type="pat">
+			<digest>Square synced to cube pattern</digest>
+		</outlet>
+		<outlet id="2" type="pat">
+			<digest>Input pattern synced to cube pattern</digest>
+		</outlet>
+	</outletlist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="pat">
+			<digest>
+				Load pattern to be cubed and output
+			</digest>
+			<description>
+			</description>
+		</method>
+		<method name="bang">
+			<arglist/>
+			<digest>
+				Output the last cubed pattern
+			</digest>
+		</method>
+</methodlist>
+
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="mx-square"/>
+		<seealso name="mx-permute"/>
+		<seealso name="mx-player~"/>
+	</seealsolist>
+
+</c74object>

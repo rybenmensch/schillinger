@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="./_c74_ref.xsl" type="text/xsl"?>
+
+<c74object name="mx-patconv" module="schillinger">
+
+	<digest>
+		Convert patterns from one format to another
+	</digest>
+	<description>
+		<o>mx-patconv</o> converts <m>(patbin)</m> to <m>(pat)</m> messages and
+		vice versa.The <m>(patbin)</m> format is output by objects such as <o>mxp1</o>,
+		<o>mx-3g</o>, and its syntax is intentionally close to the output of
+		<b>getrow</b> message from <o>matrixctrl</o>. The <m>(pat)</m> is meant to be
+		a more human readable system, as the numbers just indicate note lengths.
+	</description>
+
+	<!--METADATA-->
+	<metadatalist>
+		<metadata name="author">Manolo Müller</metadata>
+		<metadata name="tag">schillinger</metadata>
+		<metadata name="tag">message</metadata>
+		<metadata name="tag">utility</metadata>
+	</metadatalist>
+
+	<!--INLETS-->
+	<inletlist>
+		<inlet id="0" type="message">
+			<digest>(pat|patbin) Pattern to be converted</digest>
+		</inlet>
+	</inletlist>
+
+	<!--OUTLETS-->
+	<outletlist>
+		<outlet id="0" type="patbin">
+			<digest>Converted pattern</digest>
+		</outlet>
+
+	</outletlist>
+
+	<!--MESSAGES-->
+	<methodlist>
+		<method name="pat">
+			<digest>
+				Convert pattern into <m>(patbin)</m> format
+			</digest>
+			<description>
+			</description>
+		</method>
+
+		<method name="patbin">
+			<arglist />
+			<digest>
+				Convert pattern into <m>(pat)</m> format
+			</digest>
+			<description>
+			</description>
+		</method>
+
+		<method name="bang">
+			<arglist />
+			<digest>
+				Output the last converted pattern
+			</digest>
+		</method>
+</methodlist>
+
+	<!--SEEALSO-->
+	<seealsolist>
+		<seealso name="mxp1"/>
+		<seealso name="mx-permute"/>
+		<seealso name="mx-player~"/>
+	</seealsolist>
+
+</c74object>
