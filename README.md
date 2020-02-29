@@ -2,6 +2,7 @@
 © Manolo Müller
 
 Hochschule der Künste Bern - 2020
+
 ##About
 The Schillinger Max Package is an ongoing effort to implement rhythmical concepts developed by Joseph Schillinger in the first half of the 20th century. The initial development was done as part of my bachelor thesis, BA Sound Arts, Hochschule der Künste Bern, 2020. The thesis, along with additional example patches, mapping the progress of implementation can be downloaded here (all in German):
 
