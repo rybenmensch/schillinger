@@ -1,0 +1,28 @@
+{
+    "name" : "Schillinger",
+    "author" : "Manolo Müller",
+    "description" : "",
+    "homepatcher" : "SchillingerOverview.maxpat",
+    "max_version_min" : "8.0", "max_version_max" : "none",
+    "name" : "ease",
+    "os" : {
+        "macintosh" : {
+            "platform" : [ "ia32", "x64" ],
+            "min_version" : "none"
+        }
+    },
+    "package_extra" : {
+        "copyright" : "Copyright (c) 2020 Manolo Müller"
+    },
+    "filelist" : 	{
+        "docs" : ["mx-3g.maxref.xml","mx-3g~.maxref.xml","mx-autogroup.maxref.xml","mx-b.maxref.xml","mx-b~.maxref.xml","mx-c.maxref.xml","mx-c~.maxref.xml","mx-cube.maxref.xml","mx-e.maxref.xml","mx-e~.maxref.xml","mx-patconv.maxref.xml","mx-permute-groups.maxref.xml","mx-permute.maxref.xml","mx-player~.maxref.xml","mx-square.maxref.xml","mxp1.maxref.xml","mxp1~.maxref.xml","mxp2.maxref.xml","mxp2~.maxref.xml"],
+        "externals": ["mx-3g.mxo", "mx-3g~.mxo", "mx-autogroup.mxo", "mx-b.mxo", "mx-b~.mxo", "mx-c.mxo", "mx-c~.mxo", "mx-cube.mxo", "mx-e.mxo", "mx-e~.mxo", "mx-patconv.mxo", "mx-permute-groups.mxo", "mx-permute.mxo", "mx-player~.mxo", "mx-square.mxo", "mxp1.mxo", "mxp1~.mxo", "mxp2.mxo", "mxp2~.mxo"],
+        "extras": ["SchillingerOverview.maxpat", "WhyMessageObjects.maxpat"],
+        "help": ["mx-3g.maxhelp", "mx-3g~.maxhelp", "mx-autogroup.maxhelp", "mx-b.maxhelp", "mx-b~.maxhelp", "mx-c.maxhelp", "mx-c~.maxhelp", "mx-cube.maxhelp", "mx-e.maxhelp", "mx-e~.maxhelp", "mx-patconv.maxhelp", "mx-permute-groups.maxhelp", "mx-permute.maxhelp", "mx-player~.maxhelp", "mx-square.maxhelp", "mxp1.maxhelp", "mxp1~.maxhelp", "mxp2.maxhelp", "mxp2~.maxhelp"],
+        "javascript": ["gettext.js"],
+        "patchers": ["mx-seq.maxpat", "mx-seq3g.maxpat", "mx-seqsimple.maxpat", "pmetro.maxpat", "sjmp.maxpat", "thru.maxpat", "mx-periodicities1.maxpat", "mx-periodicities2.maxpat", "mx-balance.maxpat", "mx-contraction.maxpat", "mx-expansion.maxpat", "mx-threegenerators.maxpat", "chliinesynth.maxpat", "permutestsynth_en.maxpat"]
+    },
+    "tags" : [ ],
+    "version" : "0.1",
+    "website" : "https://github.com/rybenmensch/schillinger"
+}
