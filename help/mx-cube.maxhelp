@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 828.0, 79.0, 791.0, 628.0 ],
+		"rect" : [ 130.0, 79.0, 791.0, 628.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -56,7 +56,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 828.0, 105.0, 791.0, 602.0 ],
+						"rect" : [ 0.0, 26.0, 791.0, 602.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -129,7 +129,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 245.0, 482.5, 178.0, 40.0 ],
-									"presentation_linecount" : 2,
 									"text" : "See how many permutations are possible"
 								}
 
@@ -624,7 +623,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 791.0, 602.0 ],
+						"rect" : [ 130.0, 105.0, 791.0, 602.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -1080,8 +1079,8 @@
 			}
 , 			{
 				"name" : "mx-seqsimple.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/schillinger_package/patchers/0_seq",
-				"patcherrelativepath" : "../patchers/0_seq",
+				"bootpath" : "~/Documents/HKB/BACHELOR/SCHILLINGER PATCHES/externals/0_seq",
+				"patcherrelativepath" : "../../../../HKB/BACHELOR/SCHILLINGER PATCHES/externals/0_seq",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -1099,10 +1098,6 @@
 			}
 , 			{
 				"name" : "mx-cube.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "mx-patconv.mxo",
 				"type" : "iLaX"
 			}
 , 			{
