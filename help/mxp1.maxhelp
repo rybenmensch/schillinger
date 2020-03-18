@@ -452,7 +452,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 0,
 									"offset" : [ 0.0, 0.0 ],
-									"patching_rect" : [ 294.0, 374.0, 441.0, 120.0 ],
+									"patching_rect" : [ 294.0, 374.0, 438.0, 120.0 ],
 									"viewvisibility" : 1
 								}
 
@@ -563,7 +563,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-37", 1 ],
-									"midpoints" : [ 217.5, 361.0, 725.5, 361.0 ],
+									"midpoints" : [ 217.5, 361.0, 722.5, 361.0 ],
 									"source" : [ "obj-5", 3 ]
 								}
 
@@ -712,14 +712,15 @@
 			}
 , 			{
 				"name" : "mx-seq.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/schillinger_package/patchers/0_seq",
-				"patcherrelativepath" : "../patchers/0_seq",
+				"bootpath" : "~/Documents/Max 8/Packages/schillinger_package/patchers/0.seq_varia",
+				"patcherrelativepath" : "../patchers/0.seq_varia",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "thru.maxpat",
-				"bootpath" : "C74:/patchers/m4l/Pluggo for Live resources/patches",
+				"bootpath" : "~/Documents/Max 8/Packages/schillinger_package/patchers/0.seq_varia",
+				"patcherrelativepath" : "../patchers/0.seq_varia",
 				"type" : "JSON",
 				"implicit" : 1
 			}
