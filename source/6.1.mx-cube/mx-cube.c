@@ -24,11 +24,11 @@ typedef struct _schillinger{
     long c_len;
     long s_len;
     long s2_len;
-    t_ptr polynom;
-    t_ptr square;
-    t_ptr cube;
-    t_ptr sync;
-    t_ptr sync2;
+    t_atom_long *polynom;
+    t_atom_long *square;
+    t_atom_long *cube;
+    t_atom_long *sync;
+    t_atom_long *sync2;
 } t_schillinger;
 
 typedef struct _mx_cube {
@@ -68,7 +68,6 @@ void *mx_cube_new(t_symbol *s, long argc, t_atom *argv){
     
     x->sync2_out = outlet_new((t_object *)x, NULL);
     x->sync_out = outlet_new((t_object *)x, NULL);
-    //x->square_out = outlet_new((t_object *)x, NULL);
     x->cube_out = outlet_new((t_object *)x, NULL);
     
     t_schillinger *p_s = &x->t;
@@ -107,11 +106,6 @@ void mx_cube_assist(t_mx_cube *x, void *b, long m, long a, char *s){
             case 0:
                 sprintf(s, "Cubed resultant pattern");
                 break;
-                /*
-            case 1:
-                sprintf(s, "Squared resultant pattern");
-                break;
-                 */
             case 1:
                 sprintf(s, "Square synced to cube pattern");
                 break;
@@ -147,23 +141,23 @@ void mx_cube_pat(t_mx_cube *x,t_symbol *s, long argc, t_atom *argv){
     
     if(p_s->cube)
         sysmem_freeptr(p_s->cube);
-    p_s->cube = sysmem_newptrclear(p_s->c_len);
+    p_s->cube = (t_atom_long *)sysmem_newptrclear(p_s->c_len * sizeof(t_atom_long));
     
     if(p_s->polynom)
         sysmem_freeptr(p_s->polynom);
-    p_s->polynom = sysmem_newptrclear(p_s->p_len);
+    p_s->polynom = (t_atom_long *)sysmem_newptrclear(p_s->p_len * sizeof(t_atom_long));
     
     if(p_s->square)
         sysmem_freeptr(p_s->square);
-    p_s->square = sysmem_newptrclear(p_s->sq_len);
+    p_s->square = (t_atom_long *)sysmem_newptrclear(p_s->sq_len * sizeof(t_atom_long));
     
     if(p_s->sync)
         sysmem_freeptr(p_s->sync);
-    p_s->sync = sysmem_newptrclear(p_s->s_len);
+    p_s->sync = (t_atom_long *)sysmem_newptrclear(p_s->s_len * sizeof(t_atom_long));
     
     if(p_s->sync2)
         sysmem_freeptr(p_s->sync2);
-    p_s->sync2 = sysmem_newptrclear(p_s->s2_len);
+    p_s->sync2 = (t_atom_long *)sysmem_newptrclear(p_s->s2_len * sizeof(t_atom_long));
    
     long arg_sum = 0;
     for(int i=0;i<p_s->p_len;i++){
@@ -173,6 +167,7 @@ void mx_cube_pat(t_mx_cube *x,t_symbol *s, long argc, t_atom *argv){
     
     int resultcount=0;
     long arg_square = arg_sum * arg_sum;
+
     for(int i=0;i<p_s->p_len;i++){
         for(int j=0;j<p_s->p_len;j++){
             p_s->square[resultcount++] = p_s->polynom[i] * p_s->polynom[j];
@@ -216,7 +211,6 @@ void print(t_mx_cube *x){
         atom_setlong(sync2+i, p_s->sync2[i]);
     }
     
-    //outlet_anything(x->square_out, gensym("pat"), p_s->sq_len, square);
     outlet_anything(x->cube_out, gensym("pat"), p_s->c_len, cube);
     outlet_anything(x->sync_out, gensym("pat"), p_s->s_len, sync);
     outlet_anything(x->sync2_out, gensym("pat"), p_s->s2_len, sync2);
