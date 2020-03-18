@@ -1482,7 +1482,6 @@
 , 			{
 				"box" : 				{
 					"button" : 1,
-					"hidden" : 1,
 					"id" : "obj-2",
 					"maxclass" : "tab",
 					"numinlets" : 1,
@@ -1514,7 +1513,6 @@
 , 			{
 				"box" : 				{
 					"button" : 1,
-					"hidden" : 1,
 					"id" : "obj-11",
 					"maxclass" : "tab",
 					"numinlets" : 1,
@@ -1576,6 +1574,7 @@
 				"box" : 				{
 					"button" : 1,
 					"fontsize" : 14.0,
+					"hidden" : 1,
 					"id" : "obj-5",
 					"maxclass" : "tab",
 					"numinlets" : 1,
@@ -1593,6 +1592,7 @@
 				"box" : 				{
 					"button" : 1,
 					"fontsize" : 14.0,
+					"hidden" : 1,
 					"id" : "obj-18",
 					"maxclass" : "tab",
 					"numinlets" : 1,
@@ -2397,8 +2397,8 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "gettext.js",
-				"bootpath" : "~/Documents/Max 8/Packages/schillinger_package/misc",
-				"patcherrelativepath" : "../../misc",
+				"bootpath" : "~/Documents/Max 8/Packages/schillinger_package/javascript",
+				"patcherrelativepath" : "../../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
