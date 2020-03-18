@@ -20,10 +20,10 @@
 
 typedef struct _schillinger{
     long steps;
-    t_ptr polynom; //pattern from pat msg (user supplied)
+    t_atom_long *polynom; //pattern from pat msg (user supplied)
+    t_atom_long *result;
+    t_atom_long *sync;
     long p_len;
-    t_ptr result;
-    t_ptr sync;
     long arg_sum;
 } t_schillinger;
 
@@ -121,7 +121,7 @@ void mx_square_pat(t_mx_square *x,t_symbol *s, long argc, t_atom *argv){
     
     if(p_s->polynom)
         sysmem_freeptr(p_s->polynom);
-    p_s->polynom = sysmem_newptrclear(argc * sizeof(t_ptr));
+    p_s->polynom = (t_atom_long *)sysmem_newptrclear(argc * sizeof(t_atom_long));
     
     p_s->arg_sum = 0;
     for(int i=0;i<argc;i++){
@@ -136,11 +136,11 @@ void mx_square_pat(t_mx_square *x,t_symbol *s, long argc, t_atom *argv){
     
     if(p_s->result)
         sysmem_freeptr(p_s->result);
-    p_s->result = sysmem_newptrclear(p_s->steps);
+    p_s->result = (t_atom_long *)sysmem_newptrclear(p_s->steps * sizeof(t_atom_long));
     
     if(p_s->sync)
         sysmem_freeptr(p_s->sync);
-    p_s->sync = sysmem_newptrclear(argc);
+    p_s->sync = (t_atom_long *)sysmem_newptrclear(argc * sizeof(t_atom_long));
     
     int resultcount=0;
     for(int i=0;i<argc;i++){
