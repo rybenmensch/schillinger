@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 0,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -67,7 +67,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -102,6 +102,20 @@
 						"subpatcher_template" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bgcolor" : [ 0.996078431372549, 0.062745098039216, 0.062745098039216, 0.0 ],
+									"fontsize" : 10.793874139438991,
+									"id" : "obj-22",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 488.827503204345703, 427.962162162162144, 235.0, 19.0 ],
+									"text" : "These patterns get very large very quickly >",
+									"textcolor" : [ 0.996078431372549, 0.0, 0.0, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-24",
 									"maxclass" : "newobj",
@@ -349,14 +363,14 @@
 									"presentation_rect" : [ 148.0, 307.0, 41.0, 62.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_mmax" : 6.0,
+											"parameter_initial" : [ -6 ],
+											"parameter_shortname" : "c",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4,
 											"parameter_mmin" : -70.0,
 											"parameter_longname" : "c",
-											"parameter_initial_enable" : 1,
-											"parameter_mmax" : 6.0,
-											"parameter_initial" : [ -6 ],
-											"parameter_shortname" : "c"
+											"parameter_initial_enable" : 1
 										}
 
 									}
@@ -380,14 +394,14 @@
 									"presentation_rect" : [ 321.0, 307.0, 41.0, 62.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_mmax" : 6.0,
+											"parameter_initial" : [ -6 ],
+											"parameter_shortname" : "c'",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4,
 											"parameter_mmin" : -70.0,
 											"parameter_longname" : "c'",
-											"parameter_initial_enable" : 1,
-											"parameter_mmax" : 6.0,
-											"parameter_initial" : [ -6 ],
-											"parameter_shortname" : "c'"
+											"parameter_initial_enable" : 1
 										}
 
 									}
@@ -411,14 +425,14 @@
 									"presentation_rect" : [ 277.0, 307.0, 41.0, 62.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_mmax" : 6.0,
+											"parameter_initial" : [ -6 ],
+											"parameter_shortname" : "b'",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4,
 											"parameter_mmin" : -70.0,
 											"parameter_longname" : "b'",
-											"parameter_initial_enable" : 1,
-											"parameter_mmax" : 6.0,
-											"parameter_initial" : [ -6 ],
-											"parameter_shortname" : "b'"
+											"parameter_initial_enable" : 1
 										}
 
 									}
@@ -442,14 +456,14 @@
 									"presentation_rect" : [ 234.0, 307.0, 41.0, 62.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_mmax" : 6.0,
+											"parameter_initial" : [ -6 ],
+											"parameter_shortname" : "a'",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4,
 											"parameter_mmin" : -70.0,
 											"parameter_longname" : "a'",
-											"parameter_initial_enable" : 1,
-											"parameter_mmax" : 6.0,
-											"parameter_initial" : [ -6 ],
-											"parameter_shortname" : "a'"
+											"parameter_initial_enable" : 1
 										}
 
 									}
@@ -473,14 +487,14 @@
 									"presentation_rect" : [ 191.0, 307.0, 41.0, 62.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_mmax" : 6.0,
+											"parameter_initial" : [ -6 ],
+											"parameter_shortname" : "r'",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4,
 											"parameter_mmin" : -70.0,
 											"parameter_longname" : "r'",
-											"parameter_initial_enable" : 1,
-											"parameter_mmax" : 6.0,
-											"parameter_initial" : [ -6 ],
-											"parameter_shortname" : "r'"
+											"parameter_initial_enable" : 1
 										}
 
 									}
@@ -504,14 +518,14 @@
 									"presentation_rect" : [ 104.0, 307.0, 41.0, 62.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_mmax" : 6.0,
+											"parameter_initial" : [ -6 ],
+											"parameter_shortname" : "b",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4,
 											"parameter_mmin" : -70.0,
 											"parameter_longname" : "b",
-											"parameter_initial_enable" : 1,
-											"parameter_mmax" : 6.0,
-											"parameter_initial" : [ -6 ],
-											"parameter_shortname" : "b"
+											"parameter_initial_enable" : 1
 										}
 
 									}
@@ -535,12 +549,12 @@
 									"presentation_rect" : [ 407.0, 307.0, 41.0, 62.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_mmax" : 6.0,
+											"parameter_shortname" : "CD",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4,
 											"parameter_mmin" : -70.0,
-											"parameter_longname" : "CD",
-											"parameter_mmax" : 6.0,
-											"parameter_shortname" : "CD"
+											"parameter_longname" : "CD"
 										}
 
 									}
@@ -564,14 +578,14 @@
 									"presentation_rect" : [ 364.0, 307.0, 41.0, 62.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_mmax" : 6.0,
+											"parameter_initial" : [ -6 ],
+											"parameter_shortname" : "CP",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4,
 											"parameter_mmin" : -70.0,
 											"parameter_longname" : "CP",
-											"parameter_initial_enable" : 1,
-											"parameter_mmax" : 6.0,
-											"parameter_initial" : [ -6 ],
-											"parameter_shortname" : "CP"
+											"parameter_initial_enable" : 1
 										}
 
 									}
@@ -595,14 +609,14 @@
 									"presentation_rect" : [ 61.0, 307.0, 41.0, 62.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_mmax" : 6.0,
+											"parameter_initial" : [ -6 ],
+											"parameter_shortname" : "a",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4,
 											"parameter_mmin" : -70.0,
 											"parameter_longname" : "a",
-											"parameter_initial_enable" : 1,
-											"parameter_mmax" : 6.0,
-											"parameter_initial" : [ -6 ],
-											"parameter_shortname" : "a"
+											"parameter_initial_enable" : 1
 										}
 
 									}
@@ -626,14 +640,14 @@
 									"presentation_rect" : [ 18.0, 307.0, 41.0, 62.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_mmax" : 6.0,
+											"parameter_initial" : [ -6 ],
+											"parameter_shortname" : "r",
 											"parameter_type" : 0,
 											"parameter_unitstyle" : 4,
 											"parameter_mmin" : -70.0,
 											"parameter_longname" : "r",
-											"parameter_initial_enable" : 1,
-											"parameter_mmax" : 6.0,
-											"parameter_initial" : [ -6 ],
-											"parameter_shortname" : "r"
+											"parameter_initial_enable" : 1
 										}
 
 									}
@@ -1105,7 +1119,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1161,14 +1175,14 @@
 		"parameters" : 		{
 			"obj-1::obj-32" : [ "a'", "a'", 0 ],
 			"obj-1::obj-29" : [ "c", "c", 0 ],
-			"obj-1::obj-30" : [ "c'", "c'", 0 ],
-			"obj-1::obj-33" : [ "r'", "r'", 0 ],
 			"obj-1::obj-39" : [ "r", "r", 0 ],
 			"obj-1::obj-31" : [ "b'", "b'", 0 ],
 			"obj-1::obj-17" : [ "a", "a", 0 ],
 			"obj-1::obj-38" : [ "CP", "CP", 0 ],
-			"obj-1::obj-36" : [ "CD", "CD", 0 ],
+			"obj-1::obj-33" : [ "r'", "r'", 0 ],
 			"obj-1::obj-35" : [ "b", "b", 0 ],
+			"obj-1::obj-30" : [ "c'", "c'", 0 ],
+			"obj-1::obj-36" : [ "CD", "CD", 0 ],
 			"parameterbanks" : 			{
 
 			}
@@ -1195,35 +1209,36 @@
 			}
 , 			{
 				"name" : "mx-seq3g.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/schillinger_package/patchers/0_seq",
-				"patcherrelativepath" : "../patchers/0_seq",
+				"bootpath" : "~/Documents/Max 8/Packages/schillinger/patchers/0.seq_varia",
+				"patcherrelativepath" : "../patchers/0.seq_varia",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "thru.maxpat",
-				"bootpath" : "C74:/patchers/m4l/Pluggo for Live resources/patches",
+				"bootpath" : "~/Documents/Max 8/Packages/schillinger/patchers/0.seq_varia",
+				"patcherrelativepath" : "../patchers/0.seq_varia",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "sjmp.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/schillinger_package/patchers",
-				"patcherrelativepath" : "../patchers",
+				"bootpath" : "~/Documents/Max 8/Packages/schillinger/patchers/0.seq_varia",
+				"patcherrelativepath" : "../patchers/0.seq_varia",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "pmetro.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/schillinger_package/patchers",
-				"patcherrelativepath" : "../patchers",
+				"bootpath" : "~/Documents/Max 8/Packages/schillinger/patchers/0.seq_varia",
+				"patcherrelativepath" : "../patchers/0.seq_varia",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "mx-threegenerators.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/schillinger_package/patchers/4_periodicities4",
-				"patcherrelativepath" : "../patchers/4_periodicities4",
+				"bootpath" : "~/Documents/Max 8/Packages/schillinger/patchers/4.periodicities4",
+				"patcherrelativepath" : "../patchers/4.periodicities4",
 				"type" : "JSON",
 				"implicit" : 1
 			}
