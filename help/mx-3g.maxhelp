@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 0,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -50,7 +50,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -85,6 +85,20 @@
 						"subpatcher_template" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bgcolor" : [ 0.996078431372549, 0.062745098039216, 0.062745098039216, 0.0 ],
+									"fontsize" : 10.793874139438991,
+									"id" : "obj-22",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 622.0, 114.962162162162144, 235.0, 19.0 ],
+									"text" : "These patterns get very large very quickly >",
+									"textcolor" : [ 0.996078431372549, 0.0, 0.0, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bgmode" : 0,
 									"border" : 0,
@@ -231,7 +245,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -266,6 +280,20 @@
 						"subpatcher_template" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bgcolor" : [ 0.996078431372549, 0.062745098039216, 0.062745098039216, 0.0 ],
+									"fontsize" : 10.793874139438991,
+									"id" : "obj-22",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 603.0, 197.599853515625, 235.0, 19.0 ],
+									"text" : "These patterns get very large very quickly >",
+									"textcolor" : [ 0.996078431372549, 0.0, 0.0, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-11",
 									"maxclass" : "newobj",
@@ -471,7 +499,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -506,6 +534,20 @@
 						"subpatcher_template" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bgcolor" : [ 0.996078431372549, 0.062745098039216, 0.062745098039216, 0.0 ],
+									"fontsize" : 10.793874139438991,
+									"id" : "obj-22",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 625.0, 284.962162162162144, 235.0, 19.0 ],
+									"text" : "These patterns get very large very quickly >",
+									"textcolor" : [ 0.996078431372549, 0.0, 0.0, 1.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-15",
 									"maxclass" : "textbutton",
@@ -650,7 +692,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 0,
 									"offset" : [ 0.0, 0.0 ],
-									"patching_rect" : [ 11.0, 349.0, 526.0, 208.0 ],
+									"patching_rect" : [ 11.0, 353.0, 849.0, 204.0 ],
 									"viewvisibility" : 1
 								}
 
@@ -767,7 +809,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-37", 1 ],
-									"midpoints" : [ 250.5, 336.0, 527.5, 336.0 ],
+									"midpoints" : [ 250.5, 336.0, 850.5, 336.0 ],
 									"source" : [ "obj-5", 8 ]
 								}
 
@@ -835,7 +877,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -908,14 +950,15 @@
 			}
 , 			{
 				"name" : "mx-seq3g.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/schillinger_package/patchers/0_seq",
-				"patcherrelativepath" : "../patchers/0_seq",
+				"bootpath" : "~/Documents/Max 8/Packages/schillinger/patchers/0.seq_varia",
+				"patcherrelativepath" : "../patchers/0.seq_varia",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "thru.maxpat",
-				"bootpath" : "C74:/patchers/m4l/Pluggo for Live resources/patches",
+				"bootpath" : "~/Documents/Max 8/Packages/schillinger/patchers/0.seq_varia",
+				"patcherrelativepath" : "../patchers/0.seq_varia",
 				"type" : "JSON",
 				"implicit" : 1
 			}
