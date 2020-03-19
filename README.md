@@ -20,4 +20,4 @@ If you find any bugs, have suggestions for improvement or any questions, feel fr
 ### Licence
 This software package is licensed under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 
-See the Licence.md file for the full version of this licence.
+See the LICENCE.md file for the full version of this licence.
