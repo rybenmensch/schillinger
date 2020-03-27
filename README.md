@@ -16,7 +16,7 @@ The externals may either be compiled by yourself or you can download the latest 
 https://github.com/rybenmensch/schillinger/releases
 To remove this package, just delete it from the 'Packages' folder.
 ### Compilation
-To compile the externals yourself, download the MaxSDK from https://github.com/Cycling74/max-sdk. Then, move the sources into 
+To compile the externals yourself, download the MaxSDK from https://github.com/Cycling74/max-sdk. Move the extracted fodler to your Max 8/Packages directory. Then, move the sources into the source folder of the max-sdk-8.x.x package. Then, build it either with the Ruby script, or with XCode. If it doesn't work with XCode, try moving the individual folders into the source folder (e.g. so it looks like this: max-sdk-8.x.x/source/0.1.mx-patconv)
 ### Contact
 If you find any bugs, have suggestions for improvement or any questions, feel free to contact me at manolo.mueller@gmail.com.
 ### Licence
