@@ -15,6 +15,8 @@ To install this package, simply move this whole folder to your 'Packages' Folder
 The externals may either be compiled by yourself or you can download the latest release here:
 https://github.com/rybenmensch/schillinger/releases
 To remove this package, just delete it from the 'Packages' folder.
+### Compilation
+To compile the externals yourself, download the MaxSDK from https://github.com/Cycling74/max-sdk. Then, move the sources into 
 ### Contact
 If you find any bugs, have suggestions for improvement or any questions, feel free to contact me at manolo.mueller@gmail.com.
 ### Licence
