@@ -121,9 +121,12 @@ void mx_permute_groups_assist(t_mx_permute_groups *x, void *b, long m, long a, c
                 sprintf(s, "(pat) Permuted pattern");
                 break;
             case 1:
-                sprintf(s, "(int) Amount of permutations");
+                sprintf(s, "(patbin) Permuted pattern");
                 break;
             case 2:
+                sprintf(s, "(int) Amount of permutations");
+                break;
+            case 3:
                 sprintf(s, "(bang) when highest permutation is reached");
                 break;
         }
