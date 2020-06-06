@@ -4,7 +4,6 @@
     "description" : "",
     "homepatcher" : "SchillingerOverview.maxpat",
     "max_version_min" : "8.0", "max_version_max" : "none",
-    "name" : "ease",
     "os" : {
         "macintosh" : {
             "platform" : [ "ia32", "x64" ],
