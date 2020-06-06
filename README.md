@@ -18,10 +18,10 @@ As of right now, there are no Windows binaries, as I don't have a Windows develo
 
 ## Installation
 
-To install this package, simply move this whole folder to your 'Packages' Folder, normally found at ~/Documents/Max 8.
+To install this package, simply move this whole folder to your `Packages` folder, usually found at `~/Documents/Max 8`.
 The externals may either be compiled by yourself or you can download the latest release here:
 <https://github.com/rybenmensch/schillinger/releases>
-To remove this package, just delete it from the 'Packages' folder.
+To remove this package, just delete it from the `Packages` folder.
 
 ## Compilation
 
