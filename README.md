@@ -25,7 +25,7 @@ To remove this package, just delete it from the 'Packages' folder.
 
 ## Compilation
 
-To compile the externals yourself, download the MaxSDK from <https://github.com/Cycling74/max-sdk>. Move the extracted fodler to your Max 8/Packages directory. Then, move the sources into the source folder of the max-sdk-8.x.x package. Then, build it either with the Ruby script, or with XCode. If it doesn't work with XCode, try moving the individual folders into the source folder (e.g. so it looks like this: max-sdk-8.x.x/source/0.1.mx-patconv)
+To compile the externals yourself, download the MaxSDK from <https://github.com/Cycling74/max-sdk>. Move the extracted folder to your `Max 8/Packages` directory and rename it to `max-sdk`. The necessary folder (`c47support/`) and files (`Info.plist`, `build.rb`, `maxmspsdk.xcconfig`) are linked into this folder (SDK). You can open each project in XCode and build it or run `./build.rb` to build them in one run.
 
 ## Contact
 
