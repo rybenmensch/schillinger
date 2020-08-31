@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		22CF11AE0EE9A8840054F513 /* mx-patconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 22CF11AD0EE9A8840054F513 /* mx-patconv.c */; };
-		B229224824FD3C5C007530F1 /* mx-player~.c in Sources */ = {isa = PBXBuildFile; fileRef = B2B16DDB24FD3370008E9021 /* mx-player~.c */; };
+		B229227224FD400C007530F1 /* mx-player~.c in Sources */ = {isa = PBXBuildFile; fileRef = B2B16DDB24FD3370008E9021 /* mx-player~.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +33,23 @@
 		22CF11AD0EE9A8840054F513 /* mx-patconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "mx-patconv.c"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* mx-patconv.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mx-patconv.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21F637824FD367E00EAA17D /* build-all.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "build-all.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B229226124FD3F92007530F1 /* mxp1.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = mxp1.c; path = ../1.1.mxp1/mxp1.c; sourceTree = "<group>"; };
+		B229226224FD3F92007530F1 /* mxp1~.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mxp1~.c"; path = "../1.2.mxp1~/mxp1~.c"; sourceTree = "<group>"; };
+		B229226424FD3FB7007530F1 /* mxp2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mxp2.c; path = ../2.1.mxp2/mxp2.c; sourceTree = "<group>"; };
+		B229226624FD3FBD007530F1 /* mxp2~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "mxp2~.c"; path = "../2.2.mxp2~/mxp2~.c"; sourceTree = "<group>"; };
+		B229226C24FD3FF1007530F1 /* mx-c~.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mx-c~.c"; path = "../3.2.2.mx-c~/mx-c~.c"; sourceTree = "<group>"; };
+		B229226D24FD3FF1007530F1 /* mx-e~.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mx-e~.c"; path = "../3.3.2.mx-e~/mx-e~.c"; sourceTree = "<group>"; };
+		B229226E24FD3FF1007530F1 /* mx-e.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mx-e.c"; path = "../3.3.1.mx-e/mx-e.c"; sourceTree = "<group>"; };
+		B229226F24FD3FF1007530F1 /* mx-c.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mx-c.c"; path = "../3.2.1.mx-c/mx-c.c"; sourceTree = "<group>"; };
+		B229227024FD3FF1007530F1 /* mx-b~.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mx-b~.c"; path = "../3.1.2.mx-b~/mx-b~.c"; sourceTree = "<group>"; };
+		B229227124FD3FF1007530F1 /* mx-b.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mx-b.c"; path = "../3.1.1.mx-b/mx-b.c"; sourceTree = "<group>"; };
+		B229227324FD4033007530F1 /* mx-3g.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "mx-3g.c"; path = "../4.1.mx-3g/mx-3g.c"; sourceTree = "<group>"; };
+		B229227424FD4033007530F1 /* mx-3g~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "mx-3g~.c"; path = "../4.2.mx-3g~/mx-3g~.c"; sourceTree = "<group>"; };
+		B229227724FD404D007530F1 /* mx-autogroup.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mx-autogroup.c"; path = "../5.3.mx-autogroup/mx-autogroup.c"; sourceTree = "<group>"; };
+		B229227824FD404D007530F1 /* mx-permute-groups.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mx-permute-groups.c"; path = "../5.2.mx-permute-groups/mx-permute-groups.c"; sourceTree = "<group>"; };
+		B229227924FD404D007530F1 /* mx-permute.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mx-permute.c"; path = "../5.1.mx-permute/mx-permute.c"; sourceTree = "<group>"; };
+		B229227A24FD405F007530F1 /* mx-square.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mx-square.c"; path = "../6.2.mx-square/mx-square.c"; sourceTree = "<group>"; };
+		B229227B24FD405F007530F1 /* mx-cube.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "mx-cube.c"; path = "../6.1.mx-cube/mx-cube.c"; sourceTree = "<group>"; };
 		B26300C524FD31A80020ADCF /* mx-player~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mx-player~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2B16DDB24FD3370008E9021 /* mx-player~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "mx-player~.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +84,12 @@
 			children = (
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
 				B229224724FD3C54007530F1 /* 0 */,
+				B229226024FD3F78007530F1 /* 1 */,
+				B229226324FD3F9E007530F1 /* 2 */,
+				B229226824FD3FD1007530F1 /* 3 */,
+				B229226924FD3FD7007530F1 /* 4 */,
+				B229226A24FD3FDB007530F1 /* 5 */,
+				B229226B24FD3FE1007530F1 /* 6 */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
 			name = iterator;
@@ -89,6 +112,65 @@
 				B2B16DDB24FD3370008E9021 /* mx-player~.c */,
 			);
 			name = 0;
+			sourceTree = "<group>";
+		};
+		B229226024FD3F78007530F1 /* 1 */ = {
+			isa = PBXGroup;
+			children = (
+				B229226124FD3F92007530F1 /* mxp1.c */,
+				B229226224FD3F92007530F1 /* mxp1~.c */,
+			);
+			name = 1;
+			sourceTree = "<group>";
+		};
+		B229226324FD3F9E007530F1 /* 2 */ = {
+			isa = PBXGroup;
+			children = (
+				B229226424FD3FB7007530F1 /* mxp2.c */,
+				B229226624FD3FBD007530F1 /* mxp2~.c */,
+			);
+			name = 2;
+			sourceTree = "<group>";
+		};
+		B229226824FD3FD1007530F1 /* 3 */ = {
+			isa = PBXGroup;
+			children = (
+				B229227124FD3FF1007530F1 /* mx-b.c */,
+				B229227024FD3FF1007530F1 /* mx-b~.c */,
+				B229226F24FD3FF1007530F1 /* mx-c.c */,
+				B229226C24FD3FF1007530F1 /* mx-c~.c */,
+				B229226E24FD3FF1007530F1 /* mx-e.c */,
+				B229226D24FD3FF1007530F1 /* mx-e~.c */,
+			);
+			name = 3;
+			sourceTree = "<group>";
+		};
+		B229226924FD3FD7007530F1 /* 4 */ = {
+			isa = PBXGroup;
+			children = (
+				B229227324FD4033007530F1 /* mx-3g.c */,
+				B229227424FD4033007530F1 /* mx-3g~.c */,
+			);
+			name = 4;
+			sourceTree = "<group>";
+		};
+		B229226A24FD3FDB007530F1 /* 5 */ = {
+			isa = PBXGroup;
+			children = (
+				B229227924FD404D007530F1 /* mx-permute.c */,
+				B229227824FD404D007530F1 /* mx-permute-groups.c */,
+				B229227724FD404D007530F1 /* mx-autogroup.c */,
+			);
+			name = 5;
+			sourceTree = "<group>";
+		};
+		B229226B24FD3FE1007530F1 /* 6 */ = {
+			isa = PBXGroup;
+			children = (
+				B229227A24FD405F007530F1 /* mx-square.c */,
+				B229227B24FD405F007530F1 /* mx-cube.c */,
+			);
+			name = 6;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,7 +329,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B229224824FD3C5C007530F1 /* mx-player~.c in Sources */,
 				22CF11AE0EE9A8840054F513 /* mx-patconv.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B229227224FD400C007530F1 /* mx-player~.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
