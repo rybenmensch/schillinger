@@ -203,16 +203,14 @@ void outlet_s(t_mxp1_nsg *x, char *selector, int argc, char *msg, ...)
 {
     // the first symbol message counts as argc as well
     t_atom argv[argc];
-    int i, temp;
-    va_list ap;
-    va_start(ap, msg);
     atom_setsym(argv, gensym(msg));
 
-    for (i = 1; i < argc; i++) {
-        temp = va_arg(ap, int);
-        atom_setlong(argv + i, temp);
+    va_list ap;
+    va_start(ap, msg);
+    for (int i = 1; i < argc; i++) {
+        atom_setlong(argv + i, va_arg(ap, int));
     }
+    va_end(ap);
 
     outlet_anything(x->step_out, gensym(selector), argc, argv);
-    va_end(ap);
 }
