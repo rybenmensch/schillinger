@@ -142,13 +142,9 @@ void mxp1_nsg_gen(t_mxp1_nsg *x, long a, long b)
 
     long newsize = (long)x->t.steps * sizeof(int);
     
-    t_ptr temp1, temp2, temp3;
-    temp1 = sysmem_resizeptrclear(x->t.r_pat, newsize);
-    temp2 = sysmem_resizeptrclear(x->t.a_pat, newsize);
-    temp3 = sysmem_resizeptrclear(x->t.b_pat, newsize);
-    x->t.r_pat = temp1;
-    x->t.a_pat = temp2;
-    x->t.b_pat = temp3;
+    x->t.r_pat = sysmem_resizeptrclear(x->t.r_pat, newsize);
+    x->t.a_pat = sysmem_resizeptrclear(x->t.a_pat, newsize);
+    x->t.b_pat = sysmem_resizeptrclear(x->t.b_pat, newsize);
 
     for (int i = 0; i < newsize; i++) {
         x->t.r_pat[i] = 0;
