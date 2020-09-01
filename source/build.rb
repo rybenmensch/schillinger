@@ -1,0 +1,1 @@
+../../max-sdk/source/build.rb

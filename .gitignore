@@ -1,2 +1,4 @@
 externals/
 .DS_Store
+source/**/project.xcworkspace/xcuserdata/**/UserInterfaceState.xcuserstate
+source/**/xcuserdata/**/xcschemes/xcschememanagement.plist
