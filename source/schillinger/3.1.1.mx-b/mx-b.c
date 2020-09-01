@@ -78,23 +78,22 @@ void *mx_b_nsg_new(t_symbol *s, long argc, t_atom *argv)
     x->out_names[2] = "b";
     x->out_names[3] = "stp";
 
-    t_schillinger *p_s = &x->t;
-    p_s->a = 0;
-    p_s->b = 0;
-    p_s->steps = 1;  // init to one, lest we get divide by zero error later on
-    p_s->b_amt = 2;
+    x->t.a = 0;
+    x->t.b = 0;
+    x->t.steps = 1;  // init to one, lest we get divide by zero error later on
+    x->t.b_amt = 2;
 
-    p_s->r_pat = sysmem_newptrclear(p_s->steps * sizeof(t_ptr));
-    p_s->a_pat = sysmem_newptrclear(p_s->steps * sizeof(t_ptr));
-    p_s->b_pat = (t_ptr *)sysmem_newptrclear(p_s->b_amt * sizeof(t_ptr *));
+    x->t.r_pat = sysmem_newptrclear(x->t.steps * sizeof(t_ptr));
+    x->t.a_pat = sysmem_newptrclear(x->t.steps * sizeof(t_ptr));
+    x->t.b_pat = (t_ptr *)sysmem_newptrclear(x->t.b_amt * sizeof(t_ptr *));
 
-    for (int i = 0; i < p_s->b_amt; i++) {
-        p_s->b_pat[i] = sysmem_newptrclear(p_s->steps * sizeof(t_ptr));
+    for (int i = 0; i < x->t.b_amt; i++) {
+        x->t.b_pat[i] = sysmem_newptrclear(x->t.steps * sizeof(t_ptr));
     }
 
     if (argc == 2) {
-        p_s->a = atom_getlong(argv);
-        p_s->b = atom_getlong(argv + 1);
+        x->t.a = atom_getlong(argv);
+        x->t.b = atom_getlong(argv + 1);
     }
 
     return (x);
@@ -102,15 +101,13 @@ void *mx_b_nsg_new(t_symbol *s, long argc, t_atom *argv)
 
 void mx_b_nsg_free(t_mx_b_nsg *x)
 {
-    t_schillinger *p_s = &x->t;
+    sysmem_freeptr(x->t.r_pat);
+    sysmem_freeptr(x->t.a_pat);
 
-    sysmem_freeptr(p_s->r_pat);
-    sysmem_freeptr(p_s->a_pat);
-
-    for (int i = 0; i < p_s->b_amt; i++) {
-        sysmem_freeptr(p_s->b_pat[i]);
+    for (int i = 0; i < x->t.b_amt; i++) {
+        sysmem_freeptr(x->t.b_pat[i]);
     }
-    sysmem_freeptr(p_s->b_pat);
+    sysmem_freeptr(x->t.b_pat);
 }
 
 void mx_b_nsg_assist(t_mx_b_nsg *x, void *b, long m, long a, char *s)
@@ -141,10 +138,8 @@ void mx_b_nsg_assist(t_mx_b_nsg *x, void *b, long m, long a, char *s)
 
 void mx_b_nsg_bang(t_mx_b_nsg *x)
 {
-    t_schillinger *p_s = &(x->t);
-
-    if (p_s->a && p_s->b) {
-        mx_b_nsg_gen(x, p_s->a, p_s->b);
+    if (x->t.a && x->t.b) {
+        mx_b_nsg_gen(x, x->t.a, x->t.b);
     } else {
         post("No generator pair received yet!");
     }
@@ -156,10 +151,8 @@ void mx_b_nsg_gen(t_mx_b_nsg *x, long a, long b)
     a = CLAMP(a, 1, 9);
     b = CLAMP(b, 1, a);
 
-    t_schillinger *p_s = &(x->t);
-
-    p_s->a = a;
-    p_s->b = b;
+    x->t.a = a;
+    x->t.b = b;
 
     long m_amt = (long)a / b;
     long steps_aa = a * a;
@@ -167,36 +160,36 @@ void mx_b_nsg_gen(t_mx_b_nsg *x, long a, long b)
     long steps_abm = a * b * m_amt;
     long steps_groups = steps_aa + steps_abm;
     long steps_addnote = steps_aa - steps_abm;
-    p_s->steps = steps_groups + steps_addnote;
+    x->t.steps = steps_groups + steps_addnote;
 
-    long old_b_amt = p_s->b_amt;
-    p_s->b_amt = a - b + 1;
-    long newsize = (long)p_s->steps * sizeof(t_ptr);
+    long old_b_amt = x->t.b_amt;
+    x->t.b_amt = a - b + 1;
+    long newsize = (long)x->t.steps * sizeof(t_ptr);
 
-    sysmem_freeptr(p_s->r_pat);
-    p_s->r_pat = sysmem_newptrclear(newsize);
+    sysmem_freeptr(x->t.r_pat);
+    x->t.r_pat = sysmem_newptrclear(newsize);
 
-    sysmem_freeptr(p_s->a_pat);
-    p_s->a_pat = sysmem_newptrclear(newsize);
+    sysmem_freeptr(x->t.a_pat);
+    x->t.a_pat = sysmem_newptrclear(newsize);
 
     for (int i = 0; i < old_b_amt; i++) {
-        sysmem_freeptr(p_s->b_pat[i]);
+        sysmem_freeptr(x->t.b_pat[i]);
     }
-    sysmem_freeptr(p_s->b_pat);
-    p_s->b_pat = (t_ptr *)sysmem_newptrclear(p_s->b_amt * sizeof(t_ptr *));
-    for (int i = 0; i < p_s->b_amt; i++) {
-        p_s->b_pat[i] = sysmem_newptrclear(newsize);
+    sysmem_freeptr(x->t.b_pat);
+    x->t.b_pat = (t_ptr *)sysmem_newptrclear(x->t.b_amt * sizeof(t_ptr *));
+    for (int i = 0; i < x->t.b_amt; i++) {
+        x->t.b_pat[i] = sysmem_newptrclear(newsize);
     }
 
     for (int i = 0; i < 4; i++) {
         outlet_s(x, x->out_names[i], 1, "clear");
         outlet_s(x, x->out_names[i], 2, "rows", 1);
-        outlet_s(x, x->out_names[i], 2, "columns", (int)p_s->steps);
+        outlet_s(x, x->out_names[i], 2, "columns", (int)x->t.steps);
     }
-    outlet_s(x, "b", 2, "rows", p_s->b_amt);
+    outlet_s(x, "b", 2, "rows", x->t.b_amt);
 
-    outlet_int(x->step_out, p_s->b_amt);
-    outlet_int(x->step_out, p_s->steps);
+    outlet_int(x->step_out, x->t.b_amt);
+    outlet_int(x->step_out, x->t.steps);
 
     // ****************************************************************
 
@@ -205,23 +198,23 @@ void mx_b_nsg_gen(t_mx_b_nsg *x, long a, long b)
 
     for (int i = 0; i < steps_aa; i += a) {
         // a
-        p_s->a_pat[i] = 1;
+        x->t.a_pat[i] = 1;
         mx_outlet(x, "a", i, 0, 1);
 
         // r
-        p_s->r_pat[i] = 1;
+        x->t.r_pat[i] = 1;
         mx_outlet(x, "r", i, 0, 1);
     }
 
     // calculate b patterns
 
     for (int i = 0; i < steps_ab; i += b) {
-        for (int j = 0; j < p_s->b_amt; j++) {
+        for (int j = 0; j < x->t.b_amt; j++) {
             // b
-            p_s->b_pat[j][i + (j * (int)a)] = 1;
+            x->t.b_pat[j][i + (j * (int)a)] = 1;
             mx_outlet(x, "b", i + (j * (int)a), j, 1);
             // r
-            p_s->r_pat[i + (j * (int)a)] = 1;
+            x->t.r_pat[i + (j * (int)a)] = 1;
             mx_outlet(x, "r", i + (j * (int)a), 0, 1);
         }
     }
@@ -231,10 +224,10 @@ void mx_b_nsg_gen(t_mx_b_nsg *x, long a, long b)
 
     for (int i = (int)steps_aa; i < steps_groups; i += a) {
         // a
-        p_s->a_pat[i] = 1;
+        x->t.a_pat[i] = 1;
         mx_outlet(x, "a", i, 0, 1);
         // r
-        p_s->r_pat[i] = 1;
+        x->t.r_pat[i] = 1;
         mx_outlet(x, "r", i, 0, 1);
     }
 
@@ -243,46 +236,46 @@ void mx_b_nsg_gen(t_mx_b_nsg *x, long a, long b)
     for (int i = (int)steps_aa; i < steps_groups; i += b) {
         // b
         int j;
-        for (j = 0; j < p_s->b_amt; j++) {
-            p_s->b_pat[j][i] = 1;
+        for (j = 0; j < x->t.b_amt; j++) {
+            x->t.b_pat[j][i] = 1;
             mx_outlet(x, "b", i, j, 1);
         }
         // r
-        p_s->r_pat[i] = 1;
+        x->t.r_pat[i] = 1;
         mx_outlet(x, "r", i, 0, 1);
     }
     // LAST NOTE:
 
-    p_s->a_pat[steps_groups] = 1;
+    x->t.a_pat[steps_groups] = 1;
     mx_outlet(x, "a", (int)steps_groups, 0, 1);
-    p_s->r_pat[steps_groups] = 1;
+    x->t.r_pat[steps_groups] = 1;
     mx_outlet(x, "r", (int)steps_groups, 0, 1);
 
-    for (int i = 0; i < p_s->b_amt; i++) {
-        p_s->b_pat[i][steps_groups] = 1;
+    for (int i = 0; i < x->t.b_amt; i++) {
+        x->t.b_pat[i][steps_groups] = 1;
         mx_outlet(x, "b", (int)steps_groups, i, 1);
     }
 
     // print out the patterns
-    t_atom atom_r_pat[p_s->steps];
-    t_atom atom_a_pat[p_s->steps];
-    t_atom atom_b_pat[p_s->b_amt][p_s->steps];
+    t_atom atom_r_pat[x->t.steps];
+    t_atom atom_a_pat[x->t.steps];
+    t_atom atom_b_pat[x->t.b_amt][x->t.steps];
 
-    for (int i = 0; i < p_s->steps; i++) {
-        atom_setlong(atom_r_pat + i, p_s->r_pat[i]);
-        atom_setlong(atom_a_pat + i, p_s->a_pat[i]);
+    for (int i = 0; i < x->t.steps; i++) {
+        atom_setlong(atom_r_pat + i, x->t.r_pat[i]);
+        atom_setlong(atom_a_pat + i, x->t.a_pat[i]);
     }
-    outlet_anything(x->r_out, gensym("patbin"), p_s->steps, atom_r_pat);
-    outlet_anything(x->a_out, gensym("patbin"), p_s->steps, atom_a_pat);
+    outlet_anything(x->r_out, gensym("patbin"), x->t.steps, atom_r_pat);
+    outlet_anything(x->a_out, gensym("patbin"), x->t.steps, atom_a_pat);
 
     char buffer[3];
-    for (int i = 0; i < p_s->b_amt; i++) {
+    for (int i = 0; i < x->t.b_amt; i++) {
         snprintf(buffer, 3, "b%d", i);
         atom_setsym(atom_b_pat[i], gensym("patbin"));
-        for (int j = 1; j < p_s->steps + 1; j++) {
-            atom_setlong(atom_b_pat[i] + j, p_s->b_pat[i][j - 1]);
+        for (int j = 1; j < x->t.steps + 1; j++) {
+            atom_setlong(atom_b_pat[i] + j, x->t.b_pat[i][j - 1]);
         }
-        outlet_anything(x->b_out, gensym(buffer), p_s->steps + 1,
+        outlet_anything(x->b_out, gensym(buffer), x->t.steps + 1,
                         atom_b_pat[i]);
     }
 }

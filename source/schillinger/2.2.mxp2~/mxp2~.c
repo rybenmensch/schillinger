@@ -121,26 +121,25 @@ void *mxp2_new(t_symbol *s, long argc, t_atom *argv)
     x->out_names[2] = "b";
     x->out_names[3] = "stp";
 
-    t_schillinger *p_s = &x->t;
-    p_s->a = 0;
-    p_s->b = 0;
-    p_s->steps = 1;  // init to one, lest we get divide by zero error later on
-    p_s->b_amt = 2;
+    x->t.a = 0;
+    x->t.b = 0;
+    x->t.steps = 1;  // init to one, lest we get divide by zero error later on
+    x->t.b_amt = 2;
 
-    p_s->r_pat = sysmem_newptrclear(p_s->steps * sizeof(t_ptr));
-    p_s->a_pat = sysmem_newptrclear(p_s->steps * sizeof(t_ptr));
-    p_s->b_pat = (t_ptr *)sysmem_newptrclear(p_s->b_amt * sizeof(t_ptr));
-    p_s->b_outs =
+    x->t.r_pat = sysmem_newptrclear(x->t.steps * sizeof(t_ptr));
+    x->t.a_pat = sysmem_newptrclear(x->t.steps * sizeof(t_ptr));
+    x->t.b_pat = (t_ptr *)sysmem_newptrclear(x->t.b_amt * sizeof(t_ptr));
+    x->t.b_outs =
         (t_double **)sysmem_newptrclear(x->b_offset * sizeof(t_double *));
 
-    for (int i = 0; i < p_s->b_amt; i++) {
-        p_s->b_pat[i] = sysmem_newptrclear(p_s->steps * sizeof(t_ptr));
-        p_s->b_outs[i] = NULL;
+    for (int i = 0; i < x->t.b_amt; i++) {
+        x->t.b_pat[i] = sysmem_newptrclear(x->t.steps * sizeof(t_ptr));
+        x->t.b_outs[i] = NULL;
     }
 
     if (argc == 2) {
-        p_s->a = atom_getlong(argv);
-        p_s->b = atom_getlong(argv + 1);
+        x->t.a = atom_getlong(argv);
+        x->t.b = atom_getlong(argv + 1);
         mxp2_bang(x);
     }
 
@@ -149,18 +148,17 @@ void *mxp2_new(t_symbol *s, long argc, t_atom *argv)
 
 void mxp2_free(t_mxp2 *x)
 {
-    t_schillinger *p_s = &x->t;
     dsp_free((t_pxobject *)x);
 
-    sysmem_freeptr(p_s->r_pat);
-    sysmem_freeptr(p_s->a_pat);
+    sysmem_freeptr(x->t.r_pat);
+    sysmem_freeptr(x->t.a_pat);
 
-    for (int i = 0; i < p_s->b_amt; i++) {
-        sysmem_freeptr(p_s->b_pat[i]);
+    for (int i = 0; i < x->t.b_amt; i++) {
+        sysmem_freeptr(x->t.b_pat[i]);
     }
-    sysmem_freeptr(p_s->b_pat);
+    sysmem_freeptr(x->t.b_pat);
 
-    sysmem_freeptr(p_s->b_outs);
+    sysmem_freeptr(x->t.b_outs);
 }
 
 void mxp2_assist(t_mxp2 *x, void *b, long m, long a, char *s)
@@ -208,10 +206,8 @@ void mxp2_assist(t_mxp2 *x, void *b, long m, long a, char *s)
 
 void mxp2_bang(t_mxp2 *x)
 {
-    t_schillinger *p_s = &(x->t);
-
-    if (p_s->a && p_s->b) {
-        mxp2_gen(x, p_s->a, p_s->b);
+    if (x->t.a && x->t.b) {
+        mxp2_gen(x, x->t.a, x->t.b);
     } else {
         post("No generator pair received yet!");
     }
@@ -233,49 +229,47 @@ void mxp2_gen(t_mxp2 *x, long a, long b)
     a = CLAMP(a, 1, 9);
     b = CLAMP(b, 1, a);
 
-    t_schillinger *p_s = &(x->t);
+    x->t.a = a;
+    x->t.b = b;
 
-    p_s->a = a;
-    p_s->b = b;
+    x->t.steps = a * a;
+    x->t.steps_b = a * b;
 
-    p_s->steps = a * a;
-    p_s->steps_b = a * b;
-
-    long old_b_amt = p_s->b_amt;
-    p_s->b_amt = a - b + 1;
-    long newsize = (long)p_s->steps * sizeof(t_ptr);
+    long old_b_amt = x->t.b_amt;
+    x->t.b_amt = a - b + 1;
+    long newsize = (long)x->t.steps * sizeof(t_ptr);
 
     /******************************************************************/
-    sysmem_freeptr(p_s->r_pat);
-    p_s->r_pat = sysmem_newptrclear(newsize);
+    sysmem_freeptr(x->t.r_pat);
+    x->t.r_pat = sysmem_newptrclear(newsize);
 
-    sysmem_freeptr(p_s->a_pat);
-    p_s->a_pat = sysmem_newptrclear(newsize);
+    sysmem_freeptr(x->t.a_pat);
+    x->t.a_pat = sysmem_newptrclear(newsize);
 
-    if (p_s->b_outs == NULL) {
-        post("b_outs is NULL. abort\n", p_s->b_outs);
+    if (x->t.b_outs == NULL) {
+        post("b_outs is NULL. abort\n", x->t.b_outs);
         return;
     }
 
-    sysmem_freeptr(p_s->b_outs);
-    p_s->b_outs =
+    sysmem_freeptr(x->t.b_outs);
+    x->t.b_outs =
         (t_double **)sysmem_newptrclear(x->b_offset * sizeof(t_double *));
 
-    if (p_s->b_outs == NULL) {
+    if (x->t.b_outs == NULL) {
         post("allocation failed!\n");
         return;
     }
 
     // free the old array, which has the size of old_b_amt
     for (int i = 0; i < old_b_amt; i++) {
-        sysmem_freeptr(p_s->b_pat[i]);
+        sysmem_freeptr(x->t.b_pat[i]);
     }
     // free the pointer itself
-    sysmem_freeptr(p_s->b_pat);
+    sysmem_freeptr(x->t.b_pat);
 
-    p_s->b_pat = (t_ptr *)sysmem_newptrclear(p_s->b_amt * sizeof(t_ptr *));
-    for (int i = 0; i < p_s->b_amt; i++) {
-        p_s->b_pat[i] = sysmem_newptrclear(p_s->steps * sizeof(t_ptr));
+    x->t.b_pat = (t_ptr *)sysmem_newptrclear(x->t.b_amt * sizeof(t_ptr *));
+    for (int i = 0; i < x->t.b_amt; i++) {
+        x->t.b_pat[i] = sysmem_newptrclear(x->t.steps * sizeof(t_ptr));
     }
 
     // *****************************************************************
@@ -283,32 +277,32 @@ void mxp2_gen(t_mxp2 *x, long a, long b)
     for (int i = 0; i < 4; i++) {
         outlet_s(x, x->out_names[i], 1, "clear");
         outlet_s(x, x->out_names[i], 2, "rows", 1);
-        outlet_s(x, x->out_names[i], 2, "columns", (int)p_s->steps);
+        outlet_s(x, x->out_names[i], 2, "columns", (int)x->t.steps);
     }
-    outlet_s(x, "b", 2, "rows", p_s->b_amt);
+    outlet_s(x, "b", 2, "rows", x->t.b_amt);
 
-    outlet_int(x->msg_out, p_s->b_amt);
-    outlet_int(x->msg_out, p_s->steps);
+    outlet_int(x->msg_out, x->t.b_amt);
+    outlet_int(x->msg_out, x->t.steps);
 
     // ****************************************************************
 
-    for (int i = 0; i < p_s->steps; i += a) {
+    for (int i = 0; i < x->t.steps; i += a) {
         // a
-        p_s->a_pat[i] = 1;
+        x->t.a_pat[i] = 1;
         mx_outlet(x, "a", i, 0, 1);
 
         // r
-        p_s->r_pat[i] = 1;
+        x->t.r_pat[i] = 1;
         mx_outlet(x, "r", i, 0, 1);
     }
 
-    for (int i = 0; i < p_s->steps_b; i += b) {
-        for (int j = 0; j < p_s->b_amt; j++) {
+    for (int i = 0; i < x->t.steps_b; i += b) {
+        for (int j = 0; j < x->t.b_amt; j++) {
             // b
-            p_s->b_pat[j][i + (j * (int)a)] = 1;
+            x->t.b_pat[j][i + (j * (int)a)] = 1;
             mx_outlet(x, "b", i + (j * (int)a), j, 1);
             // r
-            p_s->r_pat[i + (j * (int)a)] = 1;
+            x->t.r_pat[i + (j * (int)a)] = 1;
             mx_outlet(x, "r", i + (j * (int)a), 0, 1);
         }
     }
@@ -320,7 +314,6 @@ void mxp2_perform64(t_mxp2 *x, t_object *dsp64, double **ins, long numins,
 {
     long n = sampleframes;
     t_double in1, in2, in3;
-    t_schillinger *p_s = &x->t;
 
     t_double *in1_p = ins[0];
     t_double *in2_p = ins[1];
@@ -332,10 +325,10 @@ void mxp2_perform64(t_mxp2 *x, t_object *dsp64, double **ins, long numins,
     long ra_off = 2;
     long b_off = x->b_offset;
     long rab_off = b_off + ra_off;
-    t_double **b_o = p_s->b_outs;
-    int b = (int)p_s->b_amt;
+    t_double **b_o = x->t.b_outs;
+    int b = (int)x->t.b_amt;
     int *p_counter = &x->counter;
-    long *p_steps = &p_s->steps;
+    long *p_steps = &x->t.steps;
 
     for (int i = 0; i < x->b_offset; i++) {
         if (i >= b) {
@@ -359,7 +352,7 @@ void mxp2_perform64(t_mxp2 *x, t_object *dsp64, double **ins, long numins,
             (*p_counter)++;
         }
 
-        // x->counter %=p_s->steps;
+        // x->counter %=x->t.steps;
         *p_counter %= (*p_steps);
 
         // detect click, reset counter on click
@@ -371,16 +364,16 @@ void mxp2_perform64(t_mxp2 *x, t_object *dsp64, double **ins, long numins,
         // if new in3 is different than previous step, reset the counter to in3
         // (only on ONE frame!)
         if (x->step_prev != in3 && in3 != 0) {
-            x->counter = ((int)(in3 - 1)) % p_s->steps;
+            x->counter = ((int)(in3 - 1)) % x->t.steps;
         }
 
         x->step_prev = in3;
 
-        *r_out++ = in1 * (int)p_s->r_pat[x->counter];
-        *a_out++ = in1 * (int)p_s->a_pat[x->counter];
+        *r_out++ = in1 * (int)x->t.r_pat[x->counter];
+        *a_out++ = in1 * (int)x->t.a_pat[x->counter];
 
         for (int i = 0; i < b; i++) {
-            t_double temp = in1 * (int)p_s->b_pat[i][x->counter];
+            t_double temp = in1 * (int)x->t.b_pat[i][x->counter];
             *b_o[i]++ = CLAMP(temp, -1, 1);
         }
 

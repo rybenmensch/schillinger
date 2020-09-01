@@ -85,27 +85,25 @@ void *mx_player_new(t_symbol *s, long argc, t_atom *argv)
     x->out_names[0] = "r";
     x->out_names[1] = "stp";
 
-    t_schillinger *p_s = &x->t;
-    p_s->steps = 1;  // init to one, lest we get divide by zero error later on
-    p_s->bin_steps =
+    x->t.steps = 1;  // init to one, lest we get divide by zero error later on
+    x->t.bin_steps =
         1;  // init to one, lest we get divide by zero error later on
 
-    p_s->pattern = NULL;
-    p_s->binpat = NULL;
+    x->t.pattern = NULL;
+    x->t.binpat = NULL;
     return (x);
 }
 
 void mx_player_free(t_mx_player *x)
 {
-    t_schillinger *p_s = &x->t;
     dsp_free((t_pxobject *)x);
 
-    if (p_s->pattern) {
-        sysmem_freeptr(p_s->pattern);
+    if (x->t.pattern) {
+        sysmem_freeptr(x->t.pattern);
     }
 
-    if (p_s->binpat) {
-        sysmem_freeptr(p_s->binpat);
+    if (x->t.binpat) {
+        sysmem_freeptr(x->t.binpat);
     }
 }
 
@@ -147,9 +145,7 @@ void mx_player_assist(t_mx_player *x, void *b, long m, long a, char *s)
 
 void mx_player_bang(t_mx_player *x)
 {
-    t_schillinger *p_s = &(x->t);
-
-    if (p_s->pattern || p_s->binpat) {
+    if (x->t.pattern || x->t.binpat) {
         mx_player_print(x);
     } else {
         post("No pattern received yet!");
@@ -158,61 +154,57 @@ void mx_player_bang(t_mx_player *x)
 
 void mx_player_print(t_mx_player *x)
 {
-    t_schillinger *p_s = &(x->t);
     for (int i = 0; i < 2; i++) {
         outlet_s(x, x->out_names[i], 1, "clear");
         outlet_s(x, x->out_names[i], 2, "rows", 1);
-        outlet_s(x, x->out_names[i], 2, "columns", (int)p_s->bin_steps);
+        outlet_s(x, x->out_names[i], 2, "columns", (int)x->t.bin_steps);
     }
 
     outlet_int(x->msg_out, 1);
-    outlet_int(x->msg_out, p_s->bin_steps);
+    outlet_int(x->msg_out, x->t.bin_steps);
 
-    for (int i = 0; i < p_s->bin_steps; i++) {
-        mx_outlet(x, "r", i, 0, (int)p_s->binpat[i]);
+    for (int i = 0; i < x->t.bin_steps; i++) {
+        mx_outlet(x, "r", i, 0, (int)x->t.binpat[i]);
     }
 }
 
 void mx_player_pat(t_mx_player *x, t_symbol *s, long argc, t_atom *argv)
 {
     if (!argc) return;
+    x->t.steps = argc;
 
-    t_schillinger *p_s = &(x->t);
-    p_s->steps = argc;
-
-    if (p_s->pattern) {
-        sysmem_freeptr(p_s->pattern);
+    if (x->t.pattern) {
+        sysmem_freeptr(x->t.pattern);
     }
 
-    p_s->pattern =
-        (t_atom_long *)sysmem_newptrclear(p_s->steps * sizeof(t_atom_long));
+    x->t.pattern =
+        (t_atom_long *)sysmem_newptrclear(x->t.steps * sizeof(t_atom_long));
 
     for (int i = 0; i < argc; i++) {
         t_atom_long temp = atom_getlong(argv + i);
-        p_s->pattern[i] = (temp == 0) ? 1 : temp;
+        x->t.pattern[i] = (temp == 0) ? 1 : temp;
     }
 
-    p_s->bin_steps = pattobin(p_s->steps, &(p_s->binpat), &(p_s->pattern));
+    x->t.bin_steps = pattobin(x->t.steps, &(x->t.binpat), &(x->t.pattern));
     mx_player_print(x);
 }
 
 void mx_player_patbin(t_mx_player *x, t_symbol *s, long argc, t_atom *argv)
 {
-    t_schillinger *p_s = &(x->t);
-    p_s->bin_steps = argc;
+    x->t.bin_steps = argc;
 
-    if (p_s->binpat) {
-        sysmem_freeptr(p_s->binpat);
+    if (x->t.binpat) {
+        sysmem_freeptr(x->t.binpat);
     }
 
-    p_s->binpat =
-        (t_atom_long *)sysmem_newptrclear(p_s->bin_steps * sizeof(t_atom_long));
+    x->t.binpat =
+        (t_atom_long *)sysmem_newptrclear(x->t.bin_steps * sizeof(t_atom_long));
 
     for (int i = 0; i < argc; i++) {
-        p_s->binpat[i] = atom_getlong(argv + i);
+        x->t.binpat[i] = atom_getlong(argv + i);
     }
 
-    p_s->steps = bintopat(p_s->steps, &(p_s->pattern), &(p_s->binpat));
+    x->t.steps = bintopat(x->t.steps, &(x->t.pattern), &(x->t.binpat));
     mx_player_print(x);
 }
 
@@ -296,9 +288,7 @@ void mx_player_perform64(t_mx_player *x, t_object *dsp64, double **ins,
     long n = sampleframes;
     t_double in1, in2, in3;
 
-    t_schillinger *p_s = &x->t;
-
-    if (!p_s->binpat) {
+    if (!x->t.binpat) {
         set_zero64(r_out, sampleframes);
         set_zero64(cd_out, sampleframes);
         set_zero64(cp_out, sampleframes);
@@ -315,7 +305,7 @@ void mx_player_perform64(t_mx_player *x, t_object *dsp64, double **ins,
         if (in1 > 0.) {
             x->counter++;
         }
-        x->counter %= p_s->bin_steps;
+        x->counter %= x->t.bin_steps;
 
         // detect click, reset counter on click
         if (in2 > 0.) {
@@ -325,12 +315,12 @@ void mx_player_perform64(t_mx_player *x, t_object *dsp64, double **ins,
         // if new in3 is different than previous step, reset the counter to in3
         // (only on ONE frame!)
         if (x->step_prev != in3 && in3 != 0) {
-            x->counter = ((int)(in3 - 1)) % p_s->bin_steps;
+            x->counter = ((int)(in3 - 1)) % x->t.bin_steps;
         }
 
         x->step_prev = in3;
-        if (p_s->binpat) {
-            t_double temp = in1 * (int)p_s->binpat[x->counter];
+        if (x->t.binpat) {
+            t_double temp = in1 * (int)x->t.binpat[x->counter];
             *r_out++ = CLAMP(temp, -1, 1);
         }
         *cd_out++ = in1;

@@ -66,22 +66,20 @@ void *mx_square_new(t_symbol *s, long argc, t_atom *argv)
     x->sync_out = outlet_new((t_object *)x, NULL);
     x->pat_out = outlet_new((t_object *)x, NULL);
 
-    t_schillinger *p_s = &x->t;
-    p_s->steps = 1;  // init to one, lest we get divide by zero error later on
-    p_s->arg_sum = 0;
-    p_s->polynom = NULL;
-    p_s->sync = NULL;
-    p_s->result = NULL;
+    x->t.steps = 1;  // init to one, lest we get divide by zero error later on
+    x->t.arg_sum = 0;
+    x->t.polynom = NULL;
+    x->t.sync = NULL;
+    x->t.result = NULL;
     return (x);
 }
 
 void mx_square_free(t_mx_square *x)
 {
-    t_schillinger *p_s = &x->t;
-    if (p_s->polynom) sysmem_freeptr(p_s->polynom);
+    if (x->t.polynom) sysmem_freeptr(x->t.polynom);
 
-    if (p_s->sync) sysmem_freeptr(p_s->sync);
-    if (p_s->result) sysmem_freeptr(p_s->result);
+    if (x->t.sync) sysmem_freeptr(x->t.sync);
+    if (x->t.result) sysmem_freeptr(x->t.result);
 }
 
 void mx_square_assist(t_mx_square *x, void *b, long m, long a, char *s)
@@ -106,9 +104,7 @@ void mx_square_assist(t_mx_square *x, void *b, long m, long a, char *s)
 
 void mx_square_bang(t_mx_square *x)
 {
-    t_schillinger *p_s = &x->t;
-
-    if (!p_s->result) {
+    if (!x->t.result) {
         post("No pattern received yet.");
         return;
     }
@@ -121,36 +117,34 @@ void mx_square_pat(t_mx_square *x, t_symbol *s, long argc, t_atom *argv)
     if (!argc)  // no arguments, do nothing and exit
         return;
 
-    t_schillinger *p_s = &x->t;
-
-    if (p_s->polynom) sysmem_freeptr(p_s->polynom);
-    p_s->polynom =
+    if (x->t.polynom) sysmem_freeptr(x->t.polynom);
+    x->t.polynom =
         (t_atom_long *)sysmem_newptrclear(argc * sizeof(t_atom_long));
 
-    p_s->arg_sum = 0;
+    x->t.arg_sum = 0;
     for (int i = 0; i < argc; i++) {
-        p_s->polynom[i] = atom_getlong(argv + i);
-        p_s->arg_sum += p_s->polynom[i];
+        x->t.polynom[i] = atom_getlong(argv + i);
+        x->t.arg_sum += x->t.polynom[i];
     }
 
     long power = 2;
     long a_pow = pow(argc, power);
-    p_s->steps = a_pow;
-    p_s->p_len = argc;
+    x->t.steps = a_pow;
+    x->t.p_len = argc;
 
-    if (p_s->result) sysmem_freeptr(p_s->result);
-    p_s->result =
-        (t_atom_long *)sysmem_newptrclear(p_s->steps * sizeof(t_atom_long));
+    if (x->t.result) sysmem_freeptr(x->t.result);
+    x->t.result =
+        (t_atom_long *)sysmem_newptrclear(x->t.steps * sizeof(t_atom_long));
 
-    if (p_s->sync) sysmem_freeptr(p_s->sync);
-    p_s->sync = (t_atom_long *)sysmem_newptrclear(argc * sizeof(t_atom_long));
+    if (x->t.sync) sysmem_freeptr(x->t.sync);
+    x->t.sync = (t_atom_long *)sysmem_newptrclear(argc * sizeof(t_atom_long));
 
     int resultcount = 0;
     for (int i = 0; i < argc; i++) {
         for (int j = 0; j < argc; j++) {
-            p_s->result[resultcount++] = p_s->polynom[i] * p_s->polynom[j];
+            x->t.result[resultcount++] = x->t.polynom[i] * x->t.polynom[j];
         }
-        p_s->sync[i] = p_s->arg_sum * p_s->polynom[i];
+        x->t.sync[i] = x->t.arg_sum * x->t.polynom[i];
     }
 
     // PRINTING
@@ -159,18 +153,16 @@ void mx_square_pat(t_mx_square *x, t_symbol *s, long argc, t_atom *argv)
 
 void print(t_mx_square *x)
 {
-    t_schillinger *p_s = &x->t;
+    t_atom result[x->t.steps];
+    t_atom sync[x->t.p_len];
 
-    t_atom result[p_s->steps];
-    t_atom sync[p_s->p_len];
-
-    for (int i = 0; i < p_s->steps; i++) {
-        atom_setlong(result + i, p_s->result[i]);
+    for (int i = 0; i < x->t.steps; i++) {
+        atom_setlong(result + i, x->t.result[i]);
     }
-    for (int i = 0; i < p_s->p_len; i++) {
-        atom_setlong(sync + i, p_s->sync[i]);
+    for (int i = 0; i < x->t.p_len; i++) {
+        atom_setlong(sync + i, x->t.sync[i]);
     }
 
-    outlet_anything(x->pat_out, gensym("pat"), p_s->steps, result);
-    outlet_anything(x->sync_out, gensym("pat"), p_s->p_len, sync);
+    outlet_anything(x->pat_out, gensym("pat"), x->t.steps, result);
+    outlet_anything(x->sync_out, gensym("pat"), x->t.p_len, sync);
 }

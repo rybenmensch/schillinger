@@ -73,24 +73,21 @@ void *mx_cube_new(t_symbol *s, long argc, t_atom *argv)
     x->sync_out = outlet_new((t_object *)x, NULL);
     x->cube_out = outlet_new((t_object *)x, NULL);
 
-    t_schillinger *p_s = &x->t;
-
-    p_s->polynom = NULL;
-    p_s->square = NULL;
-    p_s->cube = NULL;
-    p_s->sync = NULL;
-    p_s->sync2 = NULL;
+    x->t.polynom = NULL;
+    x->t.square = NULL;
+    x->t.cube = NULL;
+    x->t.sync = NULL;
+    x->t.sync2 = NULL;
     return (x);
 }
 
 void mx_cube_free(t_mx_cube *x)
 {
-    t_schillinger *p_s = &x->t;
-    if (p_s->polynom) sysmem_freeptr(p_s->polynom);
-    if (p_s->square) sysmem_freeptr(p_s->square);
-    if (p_s->cube) sysmem_freeptr(p_s->cube);
-    if (p_s->sync) sysmem_freeptr(p_s->sync);
-    if (p_s->sync2) sysmem_freeptr(p_s->sync2);
+    if (x->t.polynom) sysmem_freeptr(x->t.polynom);
+    if (x->t.square) sysmem_freeptr(x->t.square);
+    if (x->t.cube) sysmem_freeptr(x->t.cube);
+    if (x->t.sync) sysmem_freeptr(x->t.sync);
+    if (x->t.sync2) sysmem_freeptr(x->t.sync2);
 }
 
 void mx_cube_assist(t_mx_cube *x, void *b, long m, long a, char *s)
@@ -118,9 +115,7 @@ void mx_cube_assist(t_mx_cube *x, void *b, long m, long a, char *s)
 
 void mx_cube_bang(t_mx_cube *x)
 {
-    t_schillinger *p_s = &x->t;
-
-    if (!p_s->cube) {
+    if (!x->t.cube) {
         post("No pattern received yet.");
         return;
     }
@@ -133,59 +128,57 @@ void mx_cube_pat(t_mx_cube *x, t_symbol *s, long argc, t_atom *argv)
     if (!argc)  // no arguments, do nothing and exit
         return;
 
-    t_schillinger *p_s = &x->t;
+    x->t.p_len = argc;
+    x->t.sq_len = pow(argc, 2);
+    x->t.c_len = pow(argc, 3);
+    x->t.s_len = pow(argc, 2);
+    x->t.s2_len = argc;
 
-    p_s->p_len = argc;
-    p_s->sq_len = pow(argc, 2);
-    p_s->c_len = pow(argc, 3);
-    p_s->s_len = pow(argc, 2);
-    p_s->s2_len = argc;
+    if (x->t.cube) sysmem_freeptr(x->t.cube);
+    x->t.cube =
+        (t_atom_long *)sysmem_newptrclear(x->t.c_len * sizeof(t_atom_long));
 
-    if (p_s->cube) sysmem_freeptr(p_s->cube);
-    p_s->cube =
-        (t_atom_long *)sysmem_newptrclear(p_s->c_len * sizeof(t_atom_long));
+    if (x->t.polynom) sysmem_freeptr(x->t.polynom);
+    x->t.polynom =
+        (t_atom_long *)sysmem_newptrclear(x->t.p_len * sizeof(t_atom_long));
 
-    if (p_s->polynom) sysmem_freeptr(p_s->polynom);
-    p_s->polynom =
-        (t_atom_long *)sysmem_newptrclear(p_s->p_len * sizeof(t_atom_long));
+    if (x->t.square) sysmem_freeptr(x->t.square);
+    x->t.square =
+        (t_atom_long *)sysmem_newptrclear(x->t.sq_len * sizeof(t_atom_long));
 
-    if (p_s->square) sysmem_freeptr(p_s->square);
-    p_s->square =
-        (t_atom_long *)sysmem_newptrclear(p_s->sq_len * sizeof(t_atom_long));
+    if (x->t.sync) sysmem_freeptr(x->t.sync);
+    x->t.sync =
+        (t_atom_long *)sysmem_newptrclear(x->t.s_len * sizeof(t_atom_long));
 
-    if (p_s->sync) sysmem_freeptr(p_s->sync);
-    p_s->sync =
-        (t_atom_long *)sysmem_newptrclear(p_s->s_len * sizeof(t_atom_long));
-
-    if (p_s->sync2) sysmem_freeptr(p_s->sync2);
-    p_s->sync2 =
-        (t_atom_long *)sysmem_newptrclear(p_s->s2_len * sizeof(t_atom_long));
+    if (x->t.sync2) sysmem_freeptr(x->t.sync2);
+    x->t.sync2 =
+        (t_atom_long *)sysmem_newptrclear(x->t.s2_len * sizeof(t_atom_long));
 
     long arg_sum = 0;
-    for (int i = 0; i < p_s->p_len; i++) {
-        p_s->polynom[i] = atom_getlong(argv + i);
-        arg_sum += p_s->polynom[i];
+    for (int i = 0; i < x->t.p_len; i++) {
+        x->t.polynom[i] = atom_getlong(argv + i);
+        arg_sum += x->t.polynom[i];
     }
 
     int resultcount = 0;
     long arg_square = arg_sum * arg_sum;
 
-    for (int i = 0; i < p_s->p_len; i++) {
-        for (int j = 0; j < p_s->p_len; j++) {
-            p_s->square[resultcount++] = p_s->polynom[i] * p_s->polynom[j];
+    for (int i = 0; i < x->t.p_len; i++) {
+        for (int j = 0; j < x->t.p_len; j++) {
+            x->t.square[resultcount++] = x->t.polynom[i] * x->t.polynom[j];
         }
-        p_s->sync2[i] = arg_square * p_s->polynom[i];
+        x->t.sync2[i] = arg_square * x->t.polynom[i];
     }
 
-    for (int i = 0; i < p_s->sq_len; i++) {
-        p_s->sync[i] = arg_sum * p_s->square[i];
+    for (int i = 0; i < x->t.sq_len; i++) {
+        x->t.sync[i] = arg_sum * x->t.square[i];
     }
 
     resultcount = 0;
 
-    for (int i = 0; i < p_s->p_len; i++) {
-        for (int j = 0; j < p_s->sq_len; j++) {
-            p_s->cube[resultcount++] = p_s->polynom[i] * p_s->square[j];
+    for (int i = 0; i < x->t.p_len; i++) {
+        for (int j = 0; j < x->t.sq_len; j++) {
+            x->t.cube[resultcount++] = x->t.polynom[i] * x->t.square[j];
         }
     }
 
@@ -194,27 +187,25 @@ void mx_cube_pat(t_mx_cube *x, t_symbol *s, long argc, t_atom *argv)
 
 void print(t_mx_cube *x)
 {
-    t_schillinger *p_s = &x->t;
+    t_atom square[x->t.sq_len];
+    t_atom cube[x->t.c_len];
+    t_atom sync[x->t.sq_len];
+    t_atom sync2[x->t.p_len];
 
-    t_atom square[p_s->sq_len];
-    t_atom cube[p_s->c_len];
-    t_atom sync[p_s->sq_len];
-    t_atom sync2[p_s->p_len];
-
-    for (int i = 0; i < p_s->c_len; i++) {
-        atom_setlong(cube + i, p_s->cube[i]);
+    for (int i = 0; i < x->t.c_len; i++) {
+        atom_setlong(cube + i, x->t.cube[i]);
     }
 
-    for (int i = 0; i < p_s->sq_len; i++) {
-        atom_setlong(square + i, p_s->square[i]);
-        atom_setlong(sync + i, p_s->sync[i]);
+    for (int i = 0; i < x->t.sq_len; i++) {
+        atom_setlong(square + i, x->t.square[i]);
+        atom_setlong(sync + i, x->t.sync[i]);
     }
 
-    for (int i = 0; i < p_s->s2_len; i++) {
-        atom_setlong(sync2 + i, p_s->sync2[i]);
+    for (int i = 0; i < x->t.s2_len; i++) {
+        atom_setlong(sync2 + i, x->t.sync2[i]);
     }
 
-    outlet_anything(x->cube_out, gensym("pat"), p_s->c_len, cube);
-    outlet_anything(x->sync_out, gensym("pat"), p_s->s_len, sync);
-    outlet_anything(x->sync2_out, gensym("pat"), p_s->s2_len, sync2);
+    outlet_anything(x->cube_out, gensym("pat"), x->t.c_len, cube);
+    outlet_anything(x->sync_out, gensym("pat"), x->t.s_len, sync);
+    outlet_anything(x->sync2_out, gensym("pat"), x->t.s2_len, sync2);
 }

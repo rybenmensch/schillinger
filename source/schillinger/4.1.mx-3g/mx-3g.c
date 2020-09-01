@@ -91,21 +91,20 @@ void *mx_3g_nsg_new(t_symbol *s, long argc, t_atom *argv)
     x->out_names[7] = "c2";
     x->out_names[8] = "stp";
 
-    t_schillinger *p_s = &x->t;
-    p_s->a = 0;
-    p_s->b = 0;
-    p_s->c = 0;
-    p_s->steps = 1;  // init to one, lest we get divide by zero error later on
+    x->t.a = 0;
+    x->t.b = 0;
+    x->t.c = 0;
+    x->t.steps = 1;  // init to one, lest we get divide by zero error later on
 
-    p_s->pat_list = (t_ptr *)sysmem_newptrclear(8 * sizeof(t_ptr));
+    x->t.pat_list = (t_ptr *)sysmem_newptrclear(8 * sizeof(t_ptr));
     for (int i = 0; i < 8; i++) {
-        p_s->pat_list[i] = sysmem_newptr(p_s->steps * sizeof(t_ptr));
+        x->t.pat_list[i] = sysmem_newptr(x->t.steps * sizeof(t_ptr));
     }
 
     if (argc == 3) {
-        p_s->a = atom_getlong(argv);
-        p_s->b = atom_getlong(argv + 1);
-        p_s->c = atom_getlong(argv + 2);
+        x->t.a = atom_getlong(argv);
+        x->t.b = atom_getlong(argv + 1);
+        x->t.c = atom_getlong(argv + 2);
     }
 
     return (x);
@@ -113,13 +112,11 @@ void *mx_3g_nsg_new(t_symbol *s, long argc, t_atom *argv)
 
 void mx_3g_nsg_free(t_mx_3g_nsg *x)
 {
-    t_schillinger *p_s = &x->t;
-
-    if (p_s->pat_list) {
+    if (x->t.pat_list) {
         for (int i = 0; i < 8; i++) {
-            sysmem_freeptr(p_s->pat_list[i]);
+            sysmem_freeptr(x->t.pat_list[i]);
         }
-        sysmem_freeptr(p_s->pat_list);
+        sysmem_freeptr(x->t.pat_list);
     }
 }
 
@@ -166,10 +163,8 @@ void mx_3g_nsg_assist(t_mx_3g_nsg *x, void *b, long m, long a, char *s)
 
 void mx_3g_nsg_bang(t_mx_3g_nsg *x)
 {
-    t_schillinger *p_s = &(x->t);
-
-    if (p_s->a && p_s->b && p_s->c) {
-        mx_3g_nsg_gen(x, p_s->a, p_s->b, p_s->c);
+    if (x->t.a && x->t.b && x->t.c) {
+        mx_3g_nsg_gen(x, x->t.a, x->t.b, x->t.c);
     } else {
         post("No generator trio received yet!");
     }
@@ -177,91 +172,90 @@ void mx_3g_nsg_bang(t_mx_3g_nsg *x)
 
 void mx_3g_nsg_gen(t_mx_3g_nsg *x, long a, long b, long c)
 {
-    t_schillinger *p_s = &(x->t);
-    p_s->steps = a * b * c;
+    x->t.steps = a * b * c;
 
-    p_s->a = a;
-    p_s->b = b;
-    p_s->c = c;
-    long newsize = (long)p_s->steps * sizeof(int);
+    x->t.a = a;
+    x->t.b = b;
+    x->t.c = c;
+    long newsize = (long)x->t.steps * sizeof(int);
 
     for (int i = 0; i < 8; i++) {
-        sysmem_freeptr(p_s->pat_list[i]);
-        p_s->pat_list[i] = sysmem_newptrclear(newsize);
+        sysmem_freeptr(x->t.pat_list[i]);
+        x->t.pat_list[i] = sysmem_newptrclear(newsize);
     }
 
     for (int i = 0; i < 9; i++) {
         outlet_s(x, x->out_names[i], 1, "clear");
         outlet_s(x, x->out_names[i], 2, "rows", 1);
-        outlet_s(x, x->out_names[i], 2, "columns", (int)p_s->steps);
+        outlet_s(x, x->out_names[i], 2, "columns", (int)x->t.steps);
     }
 
     outlet_int(x->step_out, 1);
-    outlet_int(x->step_out, p_s->steps);
+    outlet_int(x->step_out, x->t.steps);
 
-    for (int i = 0; i < p_s->steps; i += a) {
+    for (int i = 0; i < x->t.steps; i += a) {
         // a
-        p_s->pat_list[A1][i] = 1;
+        x->t.pat_list[A1][i] = 1;
         mx_outlet(x, "a1", i, 0, 1);
 
         // r
-        p_s->pat_list[R1][i] = 1;
+        x->t.pat_list[R1][i] = 1;
         mx_outlet(x, "r1", i, 0, 1);
     }
 
-    for (int i = 0; i < p_s->steps; i += b) {
-        p_s->pat_list[B1][i] = 1;
+    for (int i = 0; i < x->t.steps; i += b) {
+        x->t.pat_list[B1][i] = 1;
         mx_outlet(x, "b1", i, 0, 1);
 
-        p_s->pat_list[R1][i] = 1;
+        x->t.pat_list[R1][i] = 1;
         mx_outlet(x, "r1", i, 0, 1);
     }
 
-    for (int i = 0; i < p_s->steps; i += c) {
-        p_s->pat_list[C1][i] = 1;
+    for (int i = 0; i < x->t.steps; i += c) {
+        x->t.pat_list[C1][i] = 1;
         mx_outlet(x, "c1", i, 0, 1);
 
-        p_s->pat_list[R1][i] = 1;
+        x->t.pat_list[R1][i] = 1;
         mx_outlet(x, "r1", i, 0, 1);
     }
 
     // COUNTERTHEME
 
-    for (int i = 0; i < p_s->steps; i += (b * c)) {
+    for (int i = 0; i < x->t.steps; i += (b * c)) {
         // a
-        p_s->pat_list[A2][i] = 1;
+        x->t.pat_list[A2][i] = 1;
         mx_outlet(x, "a2", i, 0, 1);
 
         // r
-        p_s->pat_list[R2][i] = 1;
+        x->t.pat_list[R2][i] = 1;
         mx_outlet(x, "r2", i, 0, 1);
     }
 
-    for (int i = 0; i < p_s->steps; i += (a * c)) {
-        p_s->pat_list[B2][i] = 1;
+    for (int i = 0; i < x->t.steps; i += (a * c)) {
+        x->t.pat_list[B2][i] = 1;
         mx_outlet(x, "b2", i, 0, 1);
 
-        p_s->pat_list[R2][i] = 1;
+        x->t.pat_list[R2][i] = 1;
         mx_outlet(x, "r2", i, 0, 1);
     }
 
-    for (int i = 0; i < p_s->steps; i += (a * b)) {
-        p_s->pat_list[C2][i] = 1;
+    for (int i = 0; i < x->t.steps; i += (a * b)) {
+        x->t.pat_list[C2][i] = 1;
         mx_outlet(x, "c2", i, 0, 1);
 
-        p_s->pat_list[R2][i] = 1;
+        x->t.pat_list[R2][i] = 1;
         mx_outlet(x, "r2", i, 0, 1);
     }
 
     // print out the patterns
 
-    t_atom atom_pats[8][p_s->steps];
+    t_atom atom_pats[8][x->t.steps];
 
     for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < p_s->steps; j++) {
-            atom_setlong(atom_pats[i] + j, p_s->pat_list[i][j]);
+        for (int j = 0; j < x->t.steps; j++) {
+            atom_setlong(atom_pats[i] + j, x->t.pat_list[i][j]);
         }
-        outlet_anything(x->outlet_list[i], gensym("patbin"), p_s->steps,
+        outlet_anything(x->outlet_list[i], gensym("patbin"), x->t.steps,
                         atom_pats[i]);
     }
 }

@@ -67,6 +67,8 @@ void *mxp1_nsg_new(t_symbol *s, long argc, t_atom *argv)
     // allocate class
     t_mxp1_nsg *x = (t_mxp1_nsg *)object_alloc(mxp1_nsg_class);
 
+    // NOTE: Alternative: move all outlets to one and use first argument in
+    //       list for routing
     x->step_out = outlet_new((t_object *)x, NULL);
     x->b_out = outlet_new((t_object *)x, NULL);
     x->a_out = outlet_new((t_object *)x, NULL);
@@ -80,6 +82,8 @@ void *mxp1_nsg_new(t_symbol *s, long argc, t_atom *argv)
     x->t.steps = 1;  // init to one, lest we get divide by zero error later on
     x->t.a = 0;
     x->t.b = 0;
+
+    // NOTE: if only one int is stored, why to you need pointers?
     x->t.a_pat = sysmem_newptrclear(x->t.steps * sizeof(int));
     x->t.b_pat = sysmem_newptrclear(x->t.steps * sizeof(int));
     x->t.r_pat = sysmem_newptrclear(x->t.steps * sizeof(int));
