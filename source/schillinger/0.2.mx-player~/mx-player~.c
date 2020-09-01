@@ -182,8 +182,8 @@ void mx_player_pat(t_mx_player *x, t_symbol *s, long argc, t_atom *argv)
         (t_atom_long *)sysmem_newptrclear(x->t.steps * sizeof(t_atom_long));
 
     for (int i = 0; i < argc; i++) {
-        t_atom_long temp = atom_getlong(argv + i);
-        x->t.pattern[i] = (temp == 0) ? 1 : temp;
+        t_atom_long step = atom_getlong(argv + i);
+        x->t.pattern[i] = (step == 0) ? 1 : step;
     }
 
     x->t.bin_steps = pattobin(x->t.steps, &(x->t.binpat), &(x->t.pattern));
@@ -321,8 +321,7 @@ void mx_player_perform64(t_mx_player *x, t_object *dsp64, double **ins,
 
         x->step_prev = in3;
         if (x->t.binpat) {
-            t_double temp = in1 * (int)x->t.binpat[x->counter];
-            *r_out++ = CLAMP(temp, -1, 1);
+            *r_out++ = CLAMP(in1 * (int)x->t.binpat[x->counter], -1, 1);
         }
         *cd_out++ = in1;
 

@@ -373,8 +373,7 @@ void mxp2_perform64(t_mxp2 *x, t_object *dsp64, double **ins, long numins,
         *a_out++ = in1 * (int)x->t.a_pat[x->counter];
 
         for (int i = 0; i < b; i++) {
-            t_double temp = in1 * (int)x->t.b_pat[i][x->counter];
-            *b_o[i]++ = CLAMP(temp, -1, 1);
+            *b_o[i]++ = CLAMP(in1 * (int)x->t.b_pat[i][x->counter], -1, 1);
         }
 
         *cd_out++ = in1;
