@@ -60,7 +60,7 @@ void mx_3g_perform64(t_mx_3g *x, t_object *dsp64, double **ins, long numins,
                      void *userparam);
 void mx_3g_dsp64(t_mx_3g *x, t_object *dsp64, short *count, double samplerate,
                  long maxvectorsize, long flags);
-void outlet_s(t_mx_3g *x, char *selector, int argc, char *msg, ...);
+void outlet_s(void *outlet, char *selector, int argc, char *msg, ...);
 void mx_outlet(t_mx_3g *x, char *pre, int a, int b, int c);
 
 t_class *mx_3g_class;  // global pointer to the object class - so max can
@@ -229,9 +229,9 @@ void mx_3g_gen(t_mx_3g *x, long a, long b, long c)
     }
 
     for (i = 0; i < 9; i++) {
-        outlet_s(x, x->out_names[i], 1, "clear");
-        outlet_s(x, x->out_names[i], 2, "rows", 1);
-        outlet_s(x, x->out_names[i], 2, "columns", (int)x->t.steps);
+        outlet_s(x->msg_out, x->out_names[i], 1, "clear");
+        outlet_s(x->msg_out, x->out_names[i], 2, "rows", 1);
+        outlet_s(x->msg_out, x->out_names[i], 2, "columns", (int)x->t.steps);
     }
 
     outlet_int(x->msg_out, 1);
@@ -368,22 +368,4 @@ void mx_outlet(t_mx_3g *x, char *pre, int a, int b, int c)
     atom_setlong(argv + 1, b);
     atom_setlong(argv + 2, c);
     outlet_anything(x->msg_out, gensym(pre), 3, argv);
-}
-
-void outlet_s(t_mx_3g *x, char *selector, int argc, char *msg, ...)
-{
-    // the first symbol message counts as argc as well
-    t_atom argv[argc];
-    int i, temp;
-    va_list ap;
-    va_start(ap, msg);
-    atom_setsym(argv, gensym(msg));
-
-    for (i = 1; i < argc; i++) {
-        temp = va_arg(ap, int);
-        atom_setlong(argv + i, temp);
-    }
-
-    outlet_anything(x->msg_out, gensym(selector), argc, argv);
-    va_end(ap);
 }

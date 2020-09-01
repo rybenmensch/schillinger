@@ -39,7 +39,7 @@ void mx_player_free(t_mx_player *x);
 void mx_player_pat(t_mx_player *x, t_symbol *s, long argc, t_atom *argv);
 void mx_player_npat(t_mx_player *x, t_symbol *s, long argc, t_atom *argv);
 
-void outlet_s(t_mx_player *x, char *selector, int argc, char *msg, ...);
+void outlet_s(void *outlet, char *selector, int argc, char *msg, ...);
 void mx_outlet(t_mx_player *x, char *pre, int a, int b, int c);
 long pattobin(long argc, t_atom_long **bin, t_atom_long **pat);
 long bintopat(long argc, t_atom_long **pat, t_atom_long **bin);
@@ -155,9 +155,10 @@ void mx_player_bang(t_mx_player *x)
 void mx_player_print(t_mx_player *x)
 {
     for (int i = 0; i < 2; i++) {
-        outlet_s(x, x->out_names[i], 1, "clear");
-        outlet_s(x, x->out_names[i], 2, "rows", 1);
-        outlet_s(x, x->out_names[i], 2, "columns", (int)x->t.bin_steps);
+        outlet_s(x->msg_out, x->out_names[i], 1, "clear");
+        outlet_s(x->msg_out, x->out_names[i], 2, "rows", 1);
+        outlet_s(x->msg_out, x->out_names[i], 2, "columns",
+                 (int)x->t.bin_steps);
     }
 
     outlet_int(x->msg_out, 1);
@@ -345,22 +346,4 @@ void mx_outlet(t_mx_player *x, char *pre, int a, int b, int c)
     atom_setlong(argv + 1, b);
     atom_setlong(argv + 2, c);
     outlet_anything(x->msg_out, gensym(pre), 3, argv);
-}
-
-void outlet_s(t_mx_player *x, char *selector, int argc, char *msg, ...)
-{
-    // the first symbol message counts as argc as well
-    t_atom argv[argc];
-    int temp;
-    va_list ap;
-    va_start(ap, msg);
-    atom_setsym(argv, gensym(msg));
-
-    for (int i = 1; i < argc; i++) {
-        temp = va_arg(ap, int);
-        atom_setlong(argv + i, temp);
-    }
-
-    outlet_anything(x->msg_out, gensym(selector), argc, argv);
-    va_end(ap);
 }

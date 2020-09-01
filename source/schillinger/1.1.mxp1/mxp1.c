@@ -43,7 +43,7 @@ void mxp1_nsg_free(t_mxp1_nsg *x);
 void mxp1_nsg_gen(t_mxp1_nsg *x, long a, long b);
 void mxp1_nsg_assist(t_mxp1_nsg *x, void *b, long m, long a, char *s);
 void mxp1_nsg_bang(t_mxp1_nsg *x);
-void outlet_s(t_mxp1_nsg *x, char *selector, int argc, char *msg, ...);
+void outlet_s(void *outlet, char *selector, int argc, char *msg, ...);
 void mx_outlet(t_mxp1_nsg *x, char *pre, int a, int b, int c);
 
 t_class *mxp1_nsg_class;
@@ -151,9 +151,9 @@ void mxp1_nsg_gen(t_mxp1_nsg *x, long a, long b)
     x->t.b_pat = sysmem_resizeptrclear(x->t.b_pat, newsize);
 
     for (int i = 0; i < 4; i++) {
-        outlet_s(x, x->out_names[i], 1, "clear");
-        outlet_s(x, x->out_names[i], 2, "rows", 1);
-        outlet_s(x, x->out_names[i], 2, "columns", (int)x->t.steps);
+        outlet_s(x->step_out, x->out_names[i], 1, "clear");
+        outlet_s(x->step_out, x->out_names[i], 2, "rows", 1);
+        outlet_s(x->step_out, x->out_names[i], 2, "columns", (int)x->t.steps);
     }
 
     outlet_int(x->step_out, 1);
@@ -201,20 +201,4 @@ void mx_outlet(t_mxp1_nsg *x, char *pre, int a, int b, int c)
     atom_setlong(argv + 1, b);
     atom_setlong(argv + 2, c);
     outlet_anything(x->step_out, gensym(pre), 3, argv);
-}
-
-void outlet_s(t_mxp1_nsg *x, char *selector, int argc, char *msg, ...)
-{
-    // the first symbol message counts as argc as well
-    t_atom argv[argc];
-    atom_setsym(argv, gensym(msg));
-
-    va_list ap;
-    va_start(ap, msg);
-    for (int i = 1; i < argc; i++) {
-        atom_setlong(argv + i, va_arg(ap, int));
-    }
-    va_end(ap);
-
-    outlet_anything(x->step_out, gensym(selector), argc, argv);
 }
