@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		22CF11AE0EE9A8840054F513 /* mx-c.c in Sources */ = {isa = PBXBuildFile; fileRef = 22CF11AD0EE9A8840054F513 /* mx-c.c */; };
+		B2EF6EC124FE5FF500C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6EC024FE5FF400C8B478 /* library.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF11AD0EE9A8840054F513 /* mx-c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "mx-c.c"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* mx-c.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mx-c.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2EF6EC024FE5FF400C8B478 /* library.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = library.c; path = "../all-externals/library.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +32,7 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
+				B2EF6EC024FE5FF400C8B478 /* library.c */,
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
 				22CF11AD0EE9A8840054F513 /* mx-c.c */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
@@ -90,6 +93,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* iterator */;
@@ -127,6 +131,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22CF11AE0EE9A8840054F513 /* mx-c.c in Sources */,
+				B2EF6EC124FE5FF500C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,25 @@
 		B25B036324FD45C000038EAA /* mx-autogroup.c in Sources */ = {isa = PBXBuildFile; fileRef = B229227724FD404D007530F1 /* mx-autogroup.c */; };
 		B25B036424FD45C300038EAA /* mx-square.c in Sources */ = {isa = PBXBuildFile; fileRef = B229227A24FD405F007530F1 /* mx-square.c */; };
 		B25B036524FD45C600038EAA /* mx-cube.c in Sources */ = {isa = PBXBuildFile; fileRef = B229227B24FD405F007530F1 /* mx-cube.c */; };
+		B2EF6E2D24FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E2E24FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E2F24FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3024FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3124FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3224FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3324FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3424FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3524FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3624FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3724FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3824FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3924FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3A24FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3B24FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3C24FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3D24FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3E24FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
+		B2EF6E3F24FE581800C8B478 /* library.c in Sources */ = {isa = PBXBuildFile; fileRef = B2EF6E2C24FE581800C8B478 /* library.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,7 +185,7 @@
 
 /* Begin PBXFileReference section */
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
-		22CF11AD0EE9A8840054F513 /* mx-patconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "mx-patconv.c"; sourceTree = "<group>"; };
+		22CF11AD0EE9A8840054F513 /* mx-patconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "mx-patconv.c"; path = "../0.1.mx-patconv/mx-patconv.c"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* mx-patconv.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mx-patconv.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21F637824FD367E00EAA17D /* build-all.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "build-all.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B229226124FD3F92007530F1 /* mxp1.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = mxp1.c; path = ../1.1.mxp1/mxp1.c; sourceTree = "<group>"; };
@@ -204,7 +223,8 @@
 		B25B034824FD410E00038EAA /* mx-square.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mx-square.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25B035324FD410E00038EAA /* mx-cube.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mx-cube.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B26300C524FD31A80020ADCF /* mx-player~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mx-player~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2B16DDB24FD3370008E9021 /* mx-player~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "mx-player~.c"; sourceTree = "<group>"; };
+		B2B16DDB24FD3370008E9021 /* mx-player~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "mx-player~.c"; path = "../0.2.mx-player~/mx-player~.c"; sourceTree = "<group>"; };
+		B2EF6E2C24FE581800C8B478 /* library.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = library.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -354,6 +374,7 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
+				B2EF6E2C24FE581800C8B478 /* library.c */,
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
 				B229224724FD3C54007530F1 /* 0 */,
 				B229226024FD3F78007530F1 /* 1 */,
@@ -1333,6 +1354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22CF11AE0EE9A8840054F513 /* mx-patconv.c in Sources */,
+				B2EF6E2D24FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1348,6 +1370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035524FD458300038EAA /* mxp1.c in Sources */,
+				B2EF6E2F24FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1356,6 +1379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035624FD458600038EAA /* mxp1~.c in Sources */,
+				B2EF6E3024FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1364,6 +1388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035724FD458900038EAA /* mxp2.c in Sources */,
+				B2EF6E3124FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1372,6 +1397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035824FD458F00038EAA /* mxp2~.c in Sources */,
+				B2EF6E3224FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1380,6 +1406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035924FD45A000038EAA /* mx-b.c in Sources */,
+				B2EF6E3324FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1388,6 +1415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035A24FD45A300038EAA /* mx-b~.c in Sources */,
+				B2EF6E3424FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1396,6 +1424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035B24FD45A700038EAA /* mx-c.c in Sources */,
+				B2EF6E3524FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1404,6 +1433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035C24FD45AA00038EAA /* mx-c~.c in Sources */,
+				B2EF6E3624FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1412,6 +1442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035D24FD45AD00038EAA /* mx-e.c in Sources */,
+				B2EF6E3724FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1420,6 +1451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035E24FD45B100038EAA /* mx-e~.c in Sources */,
+				B2EF6E3824FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1428,6 +1460,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035F24FD45B300038EAA /* mx-3g.c in Sources */,
+				B2EF6E3924FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1436,6 +1469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B036024FD45B500038EAA /* mx-3g~.c in Sources */,
+				B2EF6E3A24FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1444,6 +1478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B036124FD45B900038EAA /* mx-permute.c in Sources */,
+				B2EF6E3B24FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1452,6 +1487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B036224FD45BD00038EAA /* mx-permute-groups.c in Sources */,
+				B2EF6E3C24FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1460,6 +1496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B036324FD45C000038EAA /* mx-autogroup.c in Sources */,
+				B2EF6E3D24FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1468,6 +1505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B036424FD45C300038EAA /* mx-square.c in Sources */,
+				B2EF6E3E24FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1476,6 +1514,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B036524FD45C600038EAA /* mx-cube.c in Sources */,
+				B2EF6E3F24FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1484,6 +1523,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25B035424FD458100038EAA /* mx-player~.c in Sources */,
+				B2EF6E2E24FE581800C8B478 /* library.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
